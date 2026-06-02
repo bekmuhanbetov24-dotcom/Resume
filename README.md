@@ -42,17 +42,13 @@ npm run dev
 
 ---
 
-## Сборка для публикации в интернете
+## Публикация в интернете (GitHub Pages)
 
-Нужен Node (системный или portable):
+Сайт публикуется автоматически из папки **`static/`** при push в `main`.
 
-```powershell
-npm run build
-```
+**Адрес:** https://bekmuhanbetov24-dotcom.github.io/Resume/
 
-Папка `dist/` — загрузить на GitHub Pages / Netlify / Vercel.
-
-Либо выложить только папку **`static/`** — она работает как обычный сайт.
+Один раз включите в репозитории: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 ---
 
