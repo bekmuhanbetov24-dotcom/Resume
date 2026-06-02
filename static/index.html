@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Артур Бекмуханбетов — Senior Project Manager" />
+  <title>Артур Бекмуханбетов — Senior Project Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; min-height: 100dvh;
+      font-family: Inter, system-ui, sans-serif;
+      background: #0f1218; color: #e2e8f0;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(99,102,241,.35); }
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 90% 50% at 50% -10%, rgba(59,130,246,.07), transparent 55%), linear-gradient(180deg,#0f1218,#0c0e14);
+    }
+    .layout { position: relative; z-index: 1; display: flex; min-height: 100dvh; }
+    .sidebar {
+      display: none; width: 14rem; flex-shrink: 0;
+      position: sticky; top: 0; height: 100dvh; padding: 1.25rem;
+      border-right: 1px solid rgba(255,255,255,.05);
+      flex-direction: column;
+    }
+    @media (min-width: 1024px) { .sidebar { display: flex; } }
+    .sidebar-brand { font-family: "JetBrains Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .2em; color: #71717a; }
+    .sidebar-name { margin-top: .25rem; font-size: .875rem; font-weight: 600; color: #e4e4e7; }
+    .sidebar-role { font-size: .75rem; color: #71717a; }
+    .nav-btn {
+      display: flex; align-items: center; gap: .75rem; width: 100%;
+      padding: .625rem .75rem; margin-bottom: .25rem;
+      border: 1px solid transparent; border-radius: .75rem;
+      background: none; color: #a1a1aa; font-size: .875rem; text-align: left;
+      cursor: pointer; transition: all .2s;
+    }
+    .nav-btn:hover { color: #e4e4e7; background: rgba(255,255,255,.05); }
+    .nav-btn.active { background: rgba(59,130,246,.12); color: #93c5fd; border-color: rgba(59,130,246,.25); }
+    .nav-icon { font-family: "JetBrains Mono", monospace; width: 1.25rem; text-align: center; opacity: .7; }
+    .sidebar-status { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.05); font-size: .75rem; color: #71717a; display: flex; align-items: center; gap: .5rem; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    main { flex: 1; min-width: 0; padding-bottom: 5.5rem; }
+    @media (min-width: 1024px) { main { padding-bottom: 2rem; } }
+    .content { max-width: 48rem; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+    @media (min-width: 640px) { .content { padding: 1.5rem 1.25rem 2.5rem; } }
+    section { margin-bottom: 2rem; }
+    .card {
+      background: #161b24; border: 1px solid rgba(148,163,184,.12);
+      border-radius: .75rem; padding: 1rem 1.25rem; transition: border-color .2s;
+    }
+    @media (min-width: 640px) { .card { padding: 1.25rem 1.5rem; } }
+    .card:hover { border-color: rgba(148,163,184,.22); }
+    .hero-top { height: 3px; background: linear-gradient(90deg,#2563eb,transparent); margin: -1rem -1.25rem 1rem; border-radius: .75rem .75rem 0 0; }
+    @media (min-width:640px){ .hero-top { margin: -1.25rem -1.5rem 1.25rem; } }
+    .accent-line { height:3px;width:40px;background:linear-gradient(90deg,#3b82f6,transparent);margin-bottom:.75rem; }
+    .badge {
+      display: inline-flex; align-items: center; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05);
+      padding: .125rem .625rem; font-size: .75rem; color: #d4d4d8;
+    }
+    .badge.ok { background: rgba(16,185,129,.1); color: #6ee7b7; border-color: rgba(16,185,129,.2); }
+    .hero { position: relative; overflow: hidden; }
+    .hero-inner { display: flex; flex-direction: column; gap: 1rem; }
+    @media (min-width: 640px) { .hero-inner { flex-direction: row; align-items: flex-start; } }
+    .avatar, .avatar img {
+      width: 6rem; height: 6rem; border-radius: .5rem; flex-shrink: 0;
+      object-fit: cover; object-position: center 36%; border: 2px solid rgba(100,116,139,.4); background: #1e293b;
+    }
+    .avatar { display:flex;align-items:center;justify-content:center;font-weight:600;font-size:1.25rem;color:#94a3b8;overflow:hidden; }
+    @media (min-width:640px){ .avatar,.avatar img{width:7rem;height:7rem;} }
+    h1 { margin: 0; font-size: 1.75rem; font-weight: 700; line-height: 1.2; }
+    @media (min-width: 640px) { h1 { font-size: 2.25rem; } }
+    .role { margin: .25rem 0 0; font-size: 1rem; color: #d4d4d8; }
+    .tagline { margin: .75rem 0 0; font-family: "JetBrains Mono", monospace; font-size: .75rem; color: #71717a; }
+    .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    @media (min-width: 640px) { .stats { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
+    .stat-card { text-align: center; padding: .75rem !important; }
+    .stat-val { font-size: 1.75rem; font-weight: 700; margin: 0; }
+    .stat-label { font-size: .8125rem; color: #d4d4d8; margin: .25rem 0 0; }
+    .stat-hint { font-size: .6875rem; color: #71717a; margin: .125rem 0 0; }
+    .overline { font-family: "JetBrains Mono", monospace; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(129,140,248,.9); margin: 0 0 .25rem; }
+    h2 { margin: 0; font-size: 1.125rem; font-weight: 600; color: #f4f4f5; }
+    .section-desc { margin: .25rem 0 1rem; font-size: .875rem; color: #a1a1aa; line-height: 1.5; }
+    .summary { font-size: .9375rem; line-height: 1.6; color: #d4d4d8; margin: 0; }
+    .code-note { margin: 1rem 0 0; font-family: "JetBrains Mono", monospace; font-size: .75rem; color: rgba(129,140,248,.8); }
+    .grid-2 { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+    .list-row { display: flex; justify-content: space-between; padding-bottom: .5rem; margin-bottom: .5rem; border-bottom: 1px solid rgba(255,255,255,.05); font-size: .875rem; }
+    .list-row:last-child { border: 0; margin: 0; padding: 0; }
+    .skill-cat { font-family: "JetBrains Mono", monospace; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: #71717a; margin: 0 0 .75rem; }
+    .skill-row { margin-bottom: .75rem; }
+    .skill-head { display: flex; justify-content: space-between; font-size: .875rem; margin-bottom: .375rem; }
+    .skill-bar { height: 6px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; }
+    .skill-fill { height: 100%; border-radius: 2px; background: #3b82f6; }
+    .featured-link { display:flex;gap:.75rem;padding:.625rem .75rem;border-radius:.5rem;border:1px solid rgba(100,116,139,.25);background:rgba(30,41,59,.3);text-decoration:none;color:#cbd5e1;font-size:.875rem;transition:.2s; }
+    .featured-link:last-child { margin-bottom: 0; }
+    .featured-list { display:flex;flex-direction:column;gap:.5rem;margin-top:.75rem; }
+    .featured-link:hover { border-color:rgba(59,130,246,.4);background:rgba(30,41,59,.5);color:#f1f5f9; }
+    .featured-tag { font-size:10px;font-weight:600;text-transform:uppercase;color:#60a5fa;width:3.5rem;flex-shrink:0; }
+    .skills-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 640px) { .skills-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    .timeline { list-style: none; padding: 0; margin: 0; }
+    .timeline li { position: relative; padding-left: 1.75rem; margin-bottom: 1.5rem; }
+    .timeline li::before {
+      content: ""; position: absolute; left: 0; top: 6px; width: 12px; height: 12px;
+      border-radius: 50%; border: 2px solid #6366f1; background: #0c0c12;
+    }
+    .timeline .period { font-family: "JetBrains Mono", monospace; font-size: .75rem; color: rgba(34,211,238,.9); margin: 0; }
+    .timeline h3 { margin: .25rem 0 0; font-size: 1rem; color: #f4f4f5; }
+    .timeline .company { margin: 0; font-size: .875rem; color: rgba(165,180,252,.9); }
+    .timeline .desc { margin: .5rem 0 0; font-size: .875rem; color: #a1a1aa; line-height: 1.5; }
+    .timeline ul { margin: .75rem 0 0; padding: 0; list-style: none; }
+    .timeline ul li { padding: 0; margin: 0 0 .375rem; font-size: .875rem; color: #a1a1aa; display: flex; gap: .5rem; }
+    .timeline ul li::before { display: none; }
+    .timeline ul li span { color: #818cf8; }
+    .projects { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { .projects { grid-template-columns: 1fr 1fr; } }
+    .project-head { display: flex; justify-content: space-between; gap: .5rem; margin-bottom: .75rem; }
+    .project-head h3 { margin: 0; font-size: 1rem; }
+    .contact-grid { display: grid; gap: .75rem; }
+    @media (min-width: 640px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem; padding: 1rem;
+      border-radius: .75rem; border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02); text-decoration: none; color: inherit;
+      transition: all .2s;
+    }
+    .contact-link:hover { border-color: rgba(99,102,241,.3); background: rgba(99,102,241,.05); }
+    .contact-icon {
+      width: 2.75rem; height: 2.75rem; flex-shrink: 0; border-radius: .75rem;
+      background: rgba(99,102,241,.1); display: flex; align-items: center; justify-content: center;
+      font-family: "JetBrains Mono", monospace; font-size: .875rem; color: #a5b4fc;
+    }
+    .contact-type { font-size: .75rem; color: #71717a; margin: 0; text-transform: capitalize; }
+    .contact-label { font-size: .875rem; font-weight: 500; color: #e4e4e7; margin: .125rem 0 0; }
+    .footer-note { text-align: center; margin-top: 1.5rem; font-family: "JetBrains Mono", monospace; font-size: .75rem; color: #52525b; }
+    .mob-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+      display: flex; border-top: 1px solid rgba(255,255,255,.1);
+      background: rgba(12,12,18,.9); backdrop-filter: blur(16px);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    @media (min-width: 1024px) { .mob-nav { display: none; } }
+    .mob-nav button {
+      flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center;
+      gap: 2px; padding: .625rem .25rem; border: none; background: none;
+      font-size: 10px; color: #71717a; cursor: pointer;
+    }
+    @media (min-width: 400px) { .mob-nav button { font-size: 11px; } }
+    .mob-nav button.active { color: #60a5fa; }
+    .mob-nav .nav-icon { font-size: .875rem; }
+    .cert-grid { display: none; }
+    .cert-carousel-viewport { overflow:hidden; background:#0a0d12; min-height:220px; max-height:min(52vh,420px); touch-action:pan-y; }
+    .cert-carousel-track { display:flex; transition:transform .35s cubic-bezier(.4,0,.2,1); will-change:transform; }
+    .cert-carousel-slide { flex:0 0 100%; display:flex; align-items:center; justify-content:center; padding:.75rem; min-height:220px; }
+    .cert-carousel-slide img { max-width:100%; max-height:min(48vh,400px); object-fit:contain; border-radius:.375rem; box-shadow:0 8px 32px rgba(0,0,0,.4); user-select:none; }
+    .cert-caption { padding:1rem 1.25rem; border-top:1px solid rgba(100,116,139,.25); background:rgba(15,23,42,.4); }
+    .cert-caption h3 { margin:.25rem 0 0; font-size:1rem; color:#f1f5f9; line-height:1.35; }
+    .cert-caption .issuer { margin:.25rem 0 0; font-size:.875rem; color:#94a3b8; }
+    .cert-caption .year { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#60a5fa; }
+    .cert-controls { display:flex; align-items:center; justify-content:space-between; gap:.75rem; padding:0 1rem 1rem; }
+    .cert-nav-btn { width:2.25rem; height:2.25rem; border-radius:.5rem; border:1px solid rgba(148,163,184,.2); background:rgba(30,41,59,.5); color:#94a3b8; cursor:pointer; font-size:1rem; }
+    .cert-nav-btn:disabled { opacity:.25; cursor:not-allowed; }
+    .cert-dots { display:flex; gap:.375rem; flex:1; justify-content:center; }
+    .cert-dot { width:6px; height:6px; border-radius:999px; border:none; padding:0; background:rgba(148,163,184,.35); cursor:pointer; transition:.2s; }
+    .cert-dot.active { width:20px; background:#3b82f6; }
+    .screen { display:none; animation:fadeIn .25s ease; }
+    .screen.active { display:block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+    .other-creds { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.05); }
+    .other-creds li { font-size: .875rem; color: #a1a1aa; margin-bottom: .5rem; list-style: none; }
+    .other-creds a { color: #a5b4fc; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main>
+      <div class="content" id="app"></div>
+    </main>
+  </div>
+
+  <nav class="mob-nav" id="mob-nav" aria-label="Навигация"></nav>
+
+  <script>
+    // === Данные из резюме (PDF) — правьте здесь ===
+    const RESUME = {
+      meta: { pageTitle: "Артур Бекмуханбетов — Senior Project Manager" },
+      profile: {
+        name: "Бекмуханбетов Артур Мусаевич",
+        nameShort: "Артур Бекмуханбетов",
+        role: "Senior Project Manager",
+        roleSub: "IT · Agile · Digital Transformation · BI Innovations",
+        location: "Астана, Казахстан",
+        status: "Открыт к предложениям · удалённо",
+        photo: "photo.jpg",
+        summary: "Руководитель IT-проектов с фокусом на цифровизацию, автоматизацию и стратегическое развитие. 15+ лет карьеры: от инженера ПТО до ведения ключевого продукта и команды до 15 человек. −50 млн ₸/год на IT-экосистеме, портал 4000+ (NPS 80+), MVP с −50% трудозатрат, патент на продукт.",
+        highlights: ["−50 млн ₸/год", "4000+ · NPS 80+", "Команда 15 · Agile"]
+      },
+      stats: [
+        { label: "Опыт", value: "15+", hint: "лет" },
+        { label: "IT / PM", value: "6+", hint: "лет" },
+        { label: "Команда", value: "15", hint: "чел." },
+        { label: "Сертификаты", value: "5", hint: "PMI · Agile" }
+      ],
+      nav: [
+        { id: "overview", label: "Обзор", short: "Обзор", icon: "◈" },
+        { id: "skills", label: "Навыки", short: "Навыки", icon: "◇" },
+        { id: "certificates", label: "Сертификаты", short: "Серт.", icon: "◆" },
+        { id: "experience", label: "Опыт", short: "Опыт", icon: "▤" },
+        { id: "contact", label: "Контакты", short: "Контакты", icon: "✉" }
+      ],
+      featured: [
+        { label: "Forbes — переход на отечественную RPA-платформу", href: "https://forbes.kz/articles/kak-kazahstanskiy-stroitelnyy-holding-perehodil-na-otechestvennuyu-rpa-platformu", type: "press" },
+        { label: "Научная публикация — цифровизация в строительстве", href: "https://ojs.publisher.agency/index.php/MSC/issue/view/122", type: "research" }
+      ],
+      certificates: [
+        { id: "oracle", year: "2025", title: "Oracle Primavera Cloud", issuer: "PMI Kazakhstan · UPM RK", detail: "2 PDUs · 18.08.2025", image: "certificates/oracle-primavera-cloud.png" },
+        { id: "product-bee", year: "2025", title: "Junior Product Manager", issuer: "Product Bee Inc.", detail: "8 weeks · 11.08.2025", image: "certificates/product-bee-junior-pm.png" },
+        { id: "agile", year: "2024", title: "Agile · Scrum · SAFe · Kanban", issuer: "AgilePM.kz", detail: "№ APM241220", image: "certificates/agile-scrum-safe-kanban.png" },
+        { id: "pmi-mc", year: "2024", title: "Project Management Master Class", issuer: "PMI Kazakhstan", detail: "", image: "certificates/pmi-master-class.png" },
+        { id: "pmbok", year: "2023", title: "PMBOK® Guide 7th Edition", issuer: "СПМ РК · PMI", detail: "35 PDUs · 24–26 мая 2023", image: "certificates/pmbok-pmi-upm.png" }
+      ],
+      otherCredentials: [{ year: "2022", title: "PreMBA · BI University" }],
+      skillCategories: { pm: "Project Management", analytics: "Аналитика", tools: "Инструменты", tech: "Technology", languages: "Языки" },
+      skills: [
+        { name: "Управление проектами", level: 92, category: "pm" },
+        { name: "Agile / Scrum / Kanban", level: 90, category: "pm" },
+        { name: "PMBOK / SAFe", level: 85, category: "pm" },
+        { name: "Бизнес-анализ и ТЗ", level: 88, category: "analytics" },
+        { name: "Управление рисками", level: 85, category: "pm" },
+        { name: "Jira / Confluence", level: 90, category: "tools" },
+        { name: "MS Project / Visio", level: 82, category: "tools" },
+        { name: "Figma / Miro", level: 80, category: "tools" },
+        { name: "Power BI", level: 78, category: "analytics" },
+        { name: "SQL", level: 70, category: "tech" },
+        { name: "1С: Предприятие", level: 72, category: "tech" },
+        { name: "Vibe coding · Cursor / AI", level: 75, category: "tech" },
+        { name: "Английский язык", level: 23, category: "languages" }
+      ],
+      experience: [
+        { period: "янв 2022 — н.в.", role: "Senior Project Manager", company: "ТОО «BI Innovations»",
+          description: "Управление командой из 15 человек, ведение стратегически важного продукта компании.",
+          highlights: ["−50 млн ₸/год · ×1,5 скорость разработки", "Портал 4000+ · NPS 80+", "MVP · −50% трудозатрат", "5+ стажёров трудоустроены · патент"] },
+        { period: "окт 2019 — дек 2021", role: "Старший системный аналитик", company: "ТОО «BI Innovations»",
+          description: "ТЗ, тестирование, User Stories, презентации заказчикам.", highlights: ["Scrum · Agile"] },
+        { period: "мар 2018 — сен 2019", role: "Инженер-сметчик", company: "BI Group (строительный холдинг)",
+          description: "Сметы, объёмы работ. (hh: Nova Construction)", highlights: [] },
+        { period: "май 2013 — мар 2018", role: "Инженер ПТО", company: "ТОО «Замандас-Темиртау»",
+          description: "Акты, подрядчики, производство работ.", highlights: [] },
+        { period: "окт 2010 — дек 2012", role: "Инженер ПТО", company: "ТОО «Градстрой 2030»",
+          description: "Чертежи, ввод объектов в эксплуатацию.", highlights: [] }
+      ],
+      education: [
+        { period: "2024 — 2025", title: "MBA", note: "KBTU Business School, Алматы" },
+        { period: "2014", title: "Магистр — Промышленное и гражданское строительство", note: "КазАДИ им. Л.Б. Гончарова" },
+        { period: "2012", title: "Бакалавр — Банковское дело", note: "Колледж инновационных технологий" }
+      ],
+      contact: [
+        { label: "bekmuhanbetov24@gmail.com", href: "mailto:bekmuhanbetov24@gmail.com", type: "email" },
+        { label: "+7 (707) 131-20-44", href: "tel:+77071312044", type: "phone" },
+        { label: "Telegram @Bekmuhanbetov", href: "https://t.me/Bekmuhanbetov", type: "telegram" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/bekmukhanbetov/", type: "linkedin" }
+      ]
+    };
+
+    const icons = { email: "✉", linkedin: "in", telegram: "✈", phone: "☎" };
+
+    function initials(name) {
+      return name.split(" ").filter(Boolean).map((n) => n[0]).slice(0, 2).join("").toUpperCase();
+    }
+
+    function avatarHtml(p) {
+      const ini = initials(p.nameShort || p.name);
+      return `<div class="avatar" id="avatar-wrap"><img src="${esc(p.photo)}" alt="" onerror="this.style.display='none';document.getElementById('avatar-wrap').textContent='${ini}'" /></div>`;
+    }
+
+    function esc(s) {
+      const d = document.createElement("div");
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    let activeScreen = "overview";
+    let certIndex = 0;
+    let touchStartX = 0;
+
+    function skillsHtml() {
+      return ["pm", "analytics", "tools", "tech", "languages"].map((cat) => {
+        const items = RESUME.skills.filter((s) => s.category === cat);
+        if (!items.length) return "";
+        return `<div><p class="skill-cat">${RESUME.skillCategories[cat]}</p>${items.map((s) => `
+          <div class="skill-row"><div class="skill-head"><span>${esc(s.name)}</span><span style="font-size:.75rem;color:#64748b">${s.level}%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:${s.level}%"></div></div></div>`).join("")}</div>`;
+      }).join("");
+    }
+
+    function featuredHtml() {
+      return `<div class="featured-list">${RESUME.featured.map((f) =>
+        `<a class="featured-link" href="${esc(f.href)}" target="_blank" rel="noopener"><span class="featured-tag">${f.type === "press" ? "Press" : "Research"}</span><span>${esc(f.label)} →</span></a>`
+      ).join("")}</div>`;
+    }
+
+    function renderOverview(p) {
+      return `
+        <div class="card hero" style="margin-bottom:1rem">
+          <div class="hero-top"></div>
+          <div class="hero-inner">
+            ${avatarHtml(p)}
+            <div>
+              <div class="badges" style="margin-top:0;margin-bottom:.5rem">
+                <span class="badge ok">${esc(p.status)}</span>
+                <span class="badge">${esc(p.location)}</span>
+              </div>
+              <h1 style="color:#f8fafc;margin:0;font-size:1.75rem">${esc(p.nameShort)}</h1>
+              <p class="role" style="font-weight:500">${esc(p.role)}</p>
+              <p style="font-size:.875rem;color:#64748b;margin:.25rem 0 0">${esc(p.roleSub)}</p>
+            </div>
+          </div>
+          <p class="summary" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(100,116,139,.2)">${esc(p.summary)}</p>
+          <div class="badges" style="margin-top:1rem">${p.highlights.map((h) => `<span class="badge">${esc(h)}</span>`).join("")}</div>
+        </div>
+        <div class="stats" style="margin-bottom:1rem">
+          ${RESUME.stats.map((s) => `<div class="card stat-card"><p class="stat-val" style="color:#f1f5f9">${esc(s.value)}</p><p class="stat-label">${esc(s.label)}</p>${s.hint ? `<p class="stat-hint">${esc(s.hint)}</p>` : ""}</div>`).join("")}
+        </div>
+        <div class="card" style="margin-bottom:1rem;padding-top:1rem;padding-bottom:1rem"><div class="accent-line"></div><h2 style="margin-bottom:0">Публикации</h2><p style="font-size:.8125rem;color:#64748b;margin:.25rem 0 0">В СМИ и науке</p>${featuredHtml()}</div>
+        <div class="card"><div class="accent-line"></div><h2>Образование</h2>
+            ${RESUME.education.map((e) => `<p class="period" style="font-size:11px;color:#60a5fa">${esc(e.period)}</p><p style="font-weight:500;margin:.25rem 0;font-size:.875rem">${esc(e.title)}</p><p style="font-size:.75rem;color:#64748b;margin-bottom:.75rem">${esc(e.note)}</p>`).join("")}</div>`;
+    }
+
+    function renderSkills() {
+      return `<div class="card"><div class="accent-line"></div><h2>Навыки</h2><div class="skills-grid">${skillsHtml()}</div></div>`;
+    }
+
+    function renderCertificates() {
+      const slides = RESUME.certificates.map((c) =>
+        `<div class="cert-carousel-slide"><img src="${esc(c.image)}" alt="${esc(c.title)}" draggable="false" /></div>`
+      ).join("");
+      return `
+        <div class="accent-line"></div><h2>Сертификаты</h2>
+        <p class="section-desc">Свайп влево / вправо</p>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="cert-carousel-viewport" id="cert-viewport">
+            <div class="cert-carousel-track" id="cert-track">${slides}</div>
+          </div>
+          <div class="cert-caption" id="cert-caption"></div>
+          <div class="cert-controls">
+            <button type="button" class="cert-nav-btn" id="cert-prev" aria-label="Назад">←</button>
+            <div class="cert-dots" id="cert-dots"></div>
+            <button type="button" class="cert-nav-btn" id="cert-next" aria-label="Вперёд">→</button>
+          </div>
+        </div>
+        ${RESUME.otherCredentials.length ? `<ul class="other-creds">${RESUME.otherCredentials.map((c) => `<li><span class="period" style="display:inline;margin-right:.5rem">${esc(c.year)}</span>${esc(c.title)}</li>`).join("")}</ul>` : ""}`;
+    }
+
+    function renderExperience() {
+      return `<div class="card"><div class="accent-line"></div><h2>Опыт работы</h2>
+        <ol class="timeline">${RESUME.experience.map((j) => `
+          <li><p class="period">${esc(j.period)}</p><h3>${esc(j.role)}</h3><p class="company">${esc(j.company)}</p>
+          <p class="desc">${esc(j.description)}</p><ul>${j.highlights.map((h) => `<li><span>→</span>${esc(h)}</li>`).join("")}</ul></li>`).join("")}
+        </ol></div>`;
+    }
+
+    function renderContact(p) {
+      return `<div class="card"><div class="accent-line"></div><h2>Контакты</h2>
+        <div class="contact-grid">${RESUME.contact.map((c) => `
+          <a class="contact-link" href="${esc(c.href)}" ${c.type !== "email" && c.type !== "phone" ? 'target="_blank" rel="noopener"' : ""}>
+            <span class="contact-icon">${icons[c.type] || "↗"}</span>
+            <div><p class="contact-type">${esc(c.type)}</p><p class="contact-label">${esc(c.label)}</p></div>
+          </a>`).join("")}
+        </div>
+        <p class="footer-note">© ${new Date().getFullYear()} · ${esc(p.name)}</p></div>`;
+    }
+
+    function updateCertSlide() {
+      const track = document.getElementById("cert-track");
+      const caption = document.getElementById("cert-caption");
+      const dots = document.getElementById("cert-dots");
+      const prev = document.getElementById("cert-prev");
+      const next = document.getElementById("cert-next");
+      if (!track) return;
+      const c = RESUME.certificates[certIndex];
+      track.style.transform = `translateX(-${certIndex * 100}%)`;
+      caption.innerHTML = `<p class="year">${esc(c.year)} · ${certIndex + 1} / ${RESUME.certificates.length}</p>
+        <h3>${esc(c.title)}</h3><p class="issuer">${esc(c.issuer)}</p>${c.detail ? `<p class="issuer" style="font-size:.75rem;color:#64748b">${esc(c.detail)}</p>` : ""}`;
+      dots.innerHTML = RESUME.certificates.map((_, i) =>
+        `<button type="button" class="cert-dot${i === certIndex ? " active" : ""}" data-i="${i}" aria-label="Слайд ${i + 1}"></button>`
+      ).join("");
+      dots.querySelectorAll(".cert-dot").forEach((d) => {
+        d.addEventListener("click", () => { certIndex = +d.dataset.i; updateCertSlide(); });
+      });
+      if (prev) prev.disabled = certIndex === 0;
+      if (next) next.disabled = certIndex === RESUME.certificates.length - 1;
+    }
+
+    function bindCertCarousel() {
+      const viewport = document.getElementById("cert-viewport");
+      document.getElementById("cert-prev")?.addEventListener("click", () => { if (certIndex > 0) { certIndex--; updateCertSlide(); } });
+      document.getElementById("cert-next")?.addEventListener("click", () => { if (certIndex < RESUME.certificates.length - 1) { certIndex++; updateCertSlide(); } });
+      if (!viewport) return;
+      viewport.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      viewport.addEventListener("touchend", (e) => {
+        const dx = touchStartX - e.changedTouches[0].clientX;
+        if (dx > 50 && certIndex < RESUME.certificates.length - 1) { certIndex++; updateCertSlide(); }
+        else if (dx < -50 && certIndex > 0) { certIndex--; updateCertSlide(); }
+      }, { passive: true });
+      updateCertSlide();
+    }
+
+    function showScreen(id) {
+      activeScreen = id;
+      document.querySelectorAll(".screen").forEach((s) => s.classList.toggle("active", s.dataset.screen === id));
+      document.querySelectorAll(".nav-btn, .mob-nav button").forEach((b) => b.classList.toggle("active", b.dataset.id === id));
+      window.scrollTo(0, 0);
+      if (id === "certificates") bindCertCarousel();
+    }
+
+    function render() {
+      const p = RESUME.profile;
+      document.title = RESUME.meta.pageTitle;
+
+      document.getElementById("sidebar").innerHTML = `
+        <div><p class="sidebar-name">${esc(p.nameShort.split(" ")[0])}</p><p class="sidebar-role">Project Manager</p></div>
+        <nav style="flex:1;margin-top:1.5rem">${RESUME.nav.map((n) => `<button type="button" class="nav-btn" data-id="${n.id}"><span class="nav-icon">${n.icon}</span>${esc(n.label)}</button>`).join("")}</nav>
+        <div class="sidebar-status">${esc(p.status)}</div>`;
+
+      document.getElementById("mob-nav").innerHTML = RESUME.nav.map((n) =>
+        `<button type="button" data-id="${n.id}"><span class="nav-icon">${n.icon}</span>${esc(n.short)}</button>`
+      ).join("");
+
+      document.getElementById("app").innerHTML = `
+        <div class="screen active" data-screen="overview">${renderOverview(p)}</div>
+        <div class="screen" data-screen="skills">${renderSkills()}</div>
+        <div class="screen" data-screen="certificates">${renderCertificates()}</div>
+        <div class="screen" data-screen="experience">${renderExperience()}</div>
+        <div class="screen" data-screen="contact">${renderContact(p)}</div>`;
+
+      document.querySelectorAll("[data-id]").forEach((btn) => {
+        btn.addEventListener("click", () => showScreen(btn.dataset.id));
+      });
+      showScreen(activeScreen);
+    }
+
+    render();
+  </script>
+</body>
+</html>
