@@ -111,6 +111,7 @@ body {
 /* Certificate carousel */
 .cert-carousel-viewport {
   overflow: hidden;
+  width: 100%;
   background: #0a0d12;
   min-height: 220px;
   max-height: min(52vh, 420px);
@@ -119,12 +120,16 @@ body {
 .cert-carousel-track {
   display: flex;
   height: 100%;
+  width: 100%;
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
 }
 
 .cert-carousel-slide {
+  box-sizing: border-box;
   flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -181,4 +186,190 @@ body {
 .cert-dot.active {
   width: 20px;
   background: #3b82f6;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(30, 41, 59, 0.45);
+  color: #cbd5e1;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.45rem 0.75rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.cta-btn:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #f1f5f9;
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.cta-btn-primary {
+  border-color: rgba(59, 130, 246, 0.45);
+  background: rgba(37, 99, 235, 0.2);
+  color: #bfdbfe;
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    height: auto !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .print-only,
+  .print-only * {
+    visibility: visible;
+  }
+
+  .no-print,
+  .screen-only,
+  .grid-bg {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: #111;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
+
+  .print-resume {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 12mm;
+  }
+
+  .print-resume-header {
+    border-bottom: 1pt solid #ccc;
+    margin-bottom: 12pt;
+    padding-bottom: 10pt;
+  }
+
+  .print-only h1 {
+    font-size: 20pt;
+    margin: 0 0 4pt;
+    font-weight: 700;
+  }
+
+  .print-only .print-role {
+    color: #333;
+    margin: 0 0 2pt;
+    font-weight: 600;
+  }
+
+  .print-only .print-sub,
+  .print-only .print-contact,
+  .print-only .print-meta {
+    margin: 0 0 3pt;
+    color: #444;
+    font-size: 10pt;
+  }
+
+  .print-only h2 {
+    font-size: 12pt;
+    margin: 14pt 0 6pt;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #222;
+    border-bottom: 0.5pt solid #ddd;
+    padding-bottom: 3pt;
+  }
+
+  .print-only h3 {
+    font-size: 11pt;
+    margin: 0 0 4pt;
+    color: #111;
+  }
+
+  .print-only p {
+    margin: 0 0 6pt;
+  }
+
+  .print-only ul {
+    margin: 0 0 8pt;
+    padding-left: 16pt;
+  }
+
+  .print-only li {
+    margin-bottom: 3pt;
+  }
+
+  .print-inline-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6pt;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10pt;
+  }
+
+  .print-inline-list li {
+    background: #f3f4f6;
+    padding: 2pt 6pt;
+    border-radius: 3pt;
+    font-size: 9pt;
+  }
+
+  .print-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6pt 12pt;
+    margin: 8pt 0 0;
+  }
+
+  .print-stats dt {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #666;
+    margin: 0;
+  }
+
+  .print-stats dd {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .print-block {
+    margin-bottom: 10pt;
+    page-break-inside: avoid;
+  }
+
+  .print-period {
+    font-size: 9pt;
+    color: #666;
+    margin: 0 0 2pt;
+  }
+
+  .print-skills {
+    font-size: 9.5pt;
+    line-height: 1.5;
+  }
+
+  @page {
+    margin: 14mm;
+    size: A4;
+  }
 }

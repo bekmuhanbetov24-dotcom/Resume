@@ -1,9 +1,8 @@
-import { resume } from "../../data/resume";
+import { useLocale } from "../../locale";
 import { Card, SectionTitle } from "../ui";
 
 const iconMap: Record<string, string> = {
   email: "✉",
-  github: "⌘",
   linkedin: "in",
   telegram: "✈",
   phone: "☎",
@@ -11,16 +10,15 @@ const iconMap: Record<string, string> = {
 };
 
 export function ContactSection() {
+  const { t } = useLocale();
+
   return (
     <Card id="contact" className="animate-fade-up">
-      <SectionTitle
-        overline="Contact"
-        title="Контакты"
-      />
+      <SectionTitle overline={t.ui.contactOverline} title={t.ui.contactTitle} />
       <div className="grid gap-3 sm:grid-cols-2">
-        {resume.contact.map((link) => (
+        {t.contact.map((link) => (
           <a
-            key={link.label}
+            key={link.href}
             href={link.href}
             target={link.type === "email" || link.type === "phone" ? undefined : "_blank"}
             rel="noopener noreferrer"
@@ -39,7 +37,7 @@ export function ContactSection() {
         ))}
       </div>
       <p className="mt-6 text-center text-xs text-slate-600">
-        © {new Date().getFullYear()} · {resume.profile.name}
+        © {new Date().getFullYear()} · {t.profile.name}
       </p>
     </Card>
   );

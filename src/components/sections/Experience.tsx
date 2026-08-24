@@ -1,16 +1,18 @@
-import { resume } from "../../data/resume";
+import { useLocale } from "../../locale";
 import { Card, SectionTitle } from "../ui";
 
 export function ExperienceSection() {
+  const { t } = useLocale();
+
   return (
     <Card id="experience" className="animate-fade-up">
       <SectionTitle
-        overline="Карьера"
-        title="Опыт работы"
-        description="IT и строительство · BI Innovations"
+        overline={t.ui.expOverline}
+        title={t.ui.expTitle}
+        description={t.ui.expLead}
       />
       <ol className="relative space-y-6 sm:space-y-7">
-        {resume.experience.map((job, index) => (
+        {t.experience.map((job, index) => (
           <li
             key={`${job.company}-${job.period}`}
             className="relative pl-6 sm:pl-7 border-l border-slate-700/60"
@@ -20,7 +22,10 @@ export function ExperienceSection() {
               aria-hidden
             />
             {index === 0 && (
-              <span className="absolute -left-[5px] top-4 bottom-0 w-px bg-slate-700/40" aria-hidden />
+              <span
+                className="absolute -left-[5px] top-4 bottom-0 w-px bg-slate-700/40"
+                aria-hidden
+              />
             )}
             <p className="text-[11px] font-medium uppercase tracking-wide text-slate-500">
               {job.period}

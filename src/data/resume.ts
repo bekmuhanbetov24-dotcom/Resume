@@ -1,13 +1,10 @@
-/**
- * Все данные резюме — редактируйте здесь.
- * Фото: положите файл photo.jpg в public/ и static/
- */
+export type Locale = "ru" | "en";
 
 export type NavId =
-  | "overview"
-  | "skills"
-  | "certificates"
+  | "mandate"
+  | "impact"
   | "experience"
+  | "credentials"
   | "contact";
 
 export interface Certificate {
@@ -23,7 +20,6 @@ export interface Credential {
   year: string;
   title: string;
   issuer?: string;
-  link?: string;
 }
 
 export interface NavItem {
@@ -39,18 +35,21 @@ export interface Stat {
   hint?: string;
 }
 
-export interface Skill {
-  name: string;
-  level: number;
-  category: "pm" | "analytics" | "tools" | "tech" | "languages";
-}
-
 export interface Experience {
   period: string;
   role: string;
   company: string;
   description: string;
   highlights: string[];
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  mandate: string;
+  scale: string;
+  result: string;
+  contribution: string;
 }
 
 export interface FeaturedLink {
@@ -65,44 +64,165 @@ export interface ContactLink {
   type: "email" | "linkedin" | "telegram" | "phone" | "other";
 }
 
-export const resume = {
+export interface ResumeCopy {
   meta: {
-    pageTitle: "Артур Бекмуханбетов — Senior Project Manager",
-    tagline: "IT Project Manager · Product Owner · Digital Transformation",
-  },
+    pageTitle: string;
+    tagline: string;
+  };
+  ui: {
+    langRu: string;
+    langEn: string;
+    printPdf: string;
+    share: string;
+    shareCopied: string;
+    printSummary: string;
+    printSkills: string;
+    write: string;
+    swipe: string;
+    prev: string;
+    next: string;
+    moreCreds: string;
+    proofTitle: string;
+    casesOverline: string;
+    casesTitle: string;
+    casesLead: string;
+    caseMandate: string;
+    caseScale: string;
+    caseResult: string;
+    caseRole: string;
+    expOverline: string;
+    expTitle: string;
+    expLead: string;
+    credsOverline: string;
+    credsTitle: string;
+    credsLead: string;
+    eduTitle: string;
+    contactOverline: string;
+    contactTitle: string;
+  };
+  profile: {
+    name: string;
+    nameShort: string;
+    role: string;
+    roleSub: string;
+    location: string;
+    status: string;
+    avatarUrl: string;
+    summary: string;
+    languages: string;
+    highlights: string[];
+  };
+  stats: Stat[];
+  nav: NavItem[];
+  featured: FeaturedLink[];
+  cases: CaseStudy[];
+  skillTags: string[];
+  experience: Experience[];
+  education: { period: string; title: string; note: string }[];
+  certificates: Certificate[];
+  otherCredentials: Credential[];
+  contact: ContactLink[];
+}
 
+const contact: ContactLink[] = [
+  {
+    label: "bekmuhanbetov24@gmail.com",
+    href: "mailto:bekmuhanbetov24@gmail.com",
+    type: "email",
+  },
+  {
+    label: "+7 (707) 131-20-44",
+    href: "tel:+77071312044",
+    type: "phone",
+  },
+  {
+    label: "Telegram @Bekmuhanbetov",
+    href: "https://t.me/Bekmuhanbetov",
+    type: "telegram",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/bekmukhanbetov/",
+    type: "linkedin",
+  },
+];
+
+const certificateImages = {
+  mba: "/certificates/mba-kbtu.png",
+  pmbok: "/certificates/pmbok-pmi-upm.png",
+  pmi: "/certificates/pmi-master-class.png",
+  oracle: "/certificates/oracle-primavera-cloud.png",
+  agile: "/certificates/agile-scrum-safe-kanban.png",
+  middle: "/certificates/product-bee-middle-senior-pm.png",
+  junior: "/certificates/product-bee-junior-pm.png",
+};
+
+const ru: ResumeCopy = {
+  meta: {
+    pageTitle: "Артур Бекмуханбетов — Product Owner · CTO · CIO",
+    tagline: "Цифровизация девелопмента",
+  },
+  ui: {
+    langRu: "RU",
+    langEn: "EN",
+    printPdf: "PDF / печать",
+    share: "Поделиться",
+    shareCopied: "Ссылка скопирована",
+    printSummary: "О себе",
+    printSkills: "Навыки",
+    write: "Написать",
+    swipe: "Стрелки или свайп",
+    prev: "Предыдущий",
+    next: "Следующий",
+    moreCreds: "Дополнительно",
+    proofTitle: "В СМИ и науке",
+    casesOverline: "Impact",
+    casesTitle: "Кейсы",
+    casesLead: "Четыре инициативы, где цифра меняет девелопмент: задача, масштаб, эффект.",
+    caseMandate: "Задача",
+    caseScale: "Масштаб",
+    caseResult: "Результат",
+    caseRole: "Роль",
+    expOverline: "Карьера",
+    expTitle: "Опыт",
+    expLead: "IT и продукт — подробно. Девять лет в строительстве — как понимание отрасли, не как основной фокус.",
+    credsOverline: "Education",
+    credsTitle: "Образование и сертификаты",
+    credsLead: "MBA и PMI — в карусели первыми. Навыки — тегами, без самооценки в процентах.",
+    eduTitle: "Образование",
+    contactOverline: "Contact",
+    contactTitle: "Контакт",
+  },
   profile: {
     name: "Бекмуханбетов Артур Мусаевич",
     nameShort: "Артур Бекмуханбетов",
-    role: "Senior Project Manager",
-    roleSub: "IT · Agile · Digital Transformation · BI Innovations",
+    role: "Product Owner · CTO · CIO",
+    roleSub: "Цифровизация девелопмента · продукты и платформы",
     location: "Астана, Казахстан",
-    status: "Открыт к предложениям · удалённо",
+    status: "Открыт к предложениям",
     avatarUrl: "/photo.jpg",
     summary:
-      "Руководитель IT-проектов с фокусом на цифровизацию, автоматизацию и стратегическое развитие. 15+ лет карьеры: от инженера ПТО до ведения ключевого продукта и команды до 15 человек. Измеримые результаты: −50 млн ₸/год на IT-экосистеме, портал для 4000+ сотрудников (NPS 80+), MVP с сокращением трудозатрат отдела в 2 раза, патент на собственный продукт.",
+      "Product Owner и руководитель IT-проектов в девелопменте. 15 лет в отрасли — от производства на объектах до цифровизации крупного холдинга; 6+ лет в IT. Веду продукт под ключ: инициация, архитектура, команда, prod и развитие. Могу взять на себя и весь контур цифровизации — портфель инициатив, команды 3–20, подрядчики, отчётность CEO и правлению. На выходе — работающие сервисы с измеримым эффектом, а не презентации.",
+    languages: "Русский — рабочий · English — базовый",
     highlights: [
-      "−50 млн ₸/год · оптимизация платформы",
-      "4000+ пользователей · NPS 80+",
-      "Команда 15 · Agile / Scrum",
+      "Девелопмент · digital",
+      "6000+ пользователей · NPS 80+",
+      "Продукт под ключ · до prod",
     ],
   },
-
   stats: [
-    { label: "Опыт", value: "15+", hint: "лет" },
-    { label: "IT / PM", value: "6+", hint: "лет" },
-    { label: "Команда", value: "15", hint: "чел." },
-    { label: "Сертификаты", value: "5", hint: "PMI · Agile" },
-  ] satisfies Stat[],
-
+    { label: "Девелопмент", value: "15+", hint: "лет в отрасли" },
+    { label: "IT / продукт", value: "6+", hint: "лет" },
+    { label: "Команды", value: "3–20", hint: "человек" },
+    { label: "RPA", value: "−50 млн", hint: "₸/год · одно решение" },
+  ],
   nav: [
-    { id: "overview", label: "Обзор", shortLabel: "Обзор", icon: "◈" },
-    { id: "skills", label: "Навыки", shortLabel: "Навыки", icon: "◇" },
-    { id: "certificates", label: "Сертификаты", shortLabel: "Серт.", icon: "◆" },
+    { id: "mandate", label: "Обо мне", shortLabel: "Обо мне", icon: "◈" },
+    { id: "impact", label: "Кейсы", shortLabel: "Кейсы", icon: "◇" },
     { id: "experience", label: "Опыт", shortLabel: "Опыт", icon: "▤" },
-    { id: "contact", label: "Контакты", shortLabel: "Контакты", icon: "✉" },
-  ] satisfies NavItem[],
-
+    { id: "credentials", label: "Creds", shortLabel: "Creds", icon: "◆" },
+    { id: "contact", label: "Контакт", shortLabel: "Контакт", icon: "✉" },
+  ],
   featured: [
     {
       label: "Forbes — переход на отечественную RPA-платформу",
@@ -114,36 +234,78 @@ export const resume = {
       href: "https://ojs.publisher.agency/index.php/MSC/issue/view/122",
       type: "research",
     },
-  ] satisfies FeaturedLink[],
-
-  skills: [
-    { name: "Управление проектами", level: 92, category: "pm" },
-    { name: "Agile / Scrum / Kanban", level: 90, category: "pm" },
-    { name: "PMBOK / SAFe", level: 85, category: "pm" },
-    { name: "Бизнес-анализ и ТЗ", level: 88, category: "analytics" },
-    { name: "Управление рисками", level: 85, category: "pm" },
-    { name: "Jira / Confluence", level: 90, category: "tools" },
-    { name: "MS Project / Visio", level: 82, category: "tools" },
-    { name: "Figma / Miro", level: 80, category: "tools" },
-    { name: "Power BI", level: 78, category: "analytics" },
-    { name: "SQL", level: 70, category: "tech" },
-    { name: "1С: Предприятие", level: 72, category: "tech" },
-    { name: "Vibe coding · Cursor / AI", level: 75, category: "tech" },
-    { name: "Английский язык", level: 23, category: "languages" },
-  ] satisfies Skill[],
-
+  ],
+  cases: [
+    {
+      id: "portfolio",
+      title: "Портфель IT-проектов",
+      mandate:
+        "Объединить инициативы цифровизации — внутренние платформы и продукты для внешних пользователей — в единый контур: приоритеты, статус, эскалация для руководства.",
+      scale: "Девелоперский холдинг · команды 3–20 и подрядчики · внутренние сервисы и B2B-контуры",
+      result:
+        "Управляемый портфель вместо разрозненных заказов. В числе потоков — продукты для партнёров за периметром: цифровая связка девелопера, строительных контрагентов и сервисных компаний на сданных объектах.",
+      contribution:
+        "Портфельное управление: приоритизация, status review, баланс внутренних платформ и внешних B2B-продуктов экосистемы.",
+    },
+    {
+      id: "land-planner",
+      title: "Платформа управления земельными активами девелопера",
+      mandate:
+        "Собрать в одном продукте все процессы работы с земельными участками девелопера — вместо разрозненных Excel-таблиц, файлов и цепочек согласований.",
+      scale:
+        "Менеджеры отдела развития · карта и единая витрина · продукт в проде, масштабируется на международный контур внутри компании",
+      result:
+        "За год — продукт «Land Planner» в эксплуатации: участки на карте, процессы в одном месте, −50% трудозатрат менеджеров. Сейчас развивается как международный контур.",
+      contribution:
+        "От инициации и проектирования архитектуры до утверждения дизайна и передачи в prod. Product ownership end-to-end; зарегистрировал авторское право на «Land Planner».",
+    },
+    {
+      id: "rpa",
+      title: "Переход на отечественную RPA-платформу",
+      mandate:
+        "Снизить зависимость от зарубежного стека и стоимость автоматизации строительных и корпоративных процессов — без остановки операций.",
+      scale: "IT-экосистема холдинга · внутренние команды и подрядчики",
+      result: "50 млн ₸/год экономии с одного решения, рост скорости разработки в 1,5 раза. Материал Forbes.",
+      contribution:
+        "Выбор платформы, управление вендорами, защита решения перед бизнесом и правлением.",
+    },
+    {
+      id: "portal",
+      title: "Корпоративный портал",
+      mandate:
+        "Закрыть техдолг и превратить портал в сервис, которым пользуются 6000+ сотрудников, а не «витрину ради галочки».",
+      scale: "Весь холдинг · HR и бизнес-функции",
+      result: "NPS 80+ на контуре оценки персонала.",
+      contribution:
+        "Приоритизация бэклога, работа со стейкхолдерами, итеративная поставка, контроль качества сервиса.",
+    },
+  ],
+  skillTags: [
+    "Цифровизация девелопмента",
+    "Product ownership",
+    "Портфель проектов",
+    "Команды 3–20",
+    "CTO / платформы",
+    "RPA и автоматизация",
+    "Agile · Scrum · SAFe",
+    "Стейкхолдеры · правление",
+    "Power BI · 1С",
+    "AI / Cursor",
+  ],
   experience: [
     {
       period: "янв 2022 — н.в.",
-      role: "Senior Project Manager",
+      role: "Руководитель проекта IT · Product Owner",
       company: "ТОО «BI Innovations», Астана",
       description:
-        "Управление командой из 15 человек, ведение стратегически важного продукта компании.",
+        "Цифровизация девелоперского контура холдинга: ключевые продукты и платформы, портфель инициатив, команды и подрядчики, эскалация на CEO и правление.",
       highlights: [
-        "Миграция на отечественную RPA-платформу — 50 млн ₸/год, ×1,5 скорость разработки",
-        "Корпоративный портал: техдолг, оценка персонала 4000+ (NPS 80+)",
-        "MVP единого окна планирования — −50% трудозатрат отдела",
-        "Scrum-церемонии; 5+ стажёров трудоустроены; патент на продукт",
+        "Портфель IT-проектов: единые приоритеты, статус и эскалация",
+        "Команды от 3 до 20 человек + подрядчики",
+        "Платформа земельных активов («Land Planner»): Excel → карта, −50% трудозатрат менеджеров; авторское право; международный контур",
+        "RPA-платформа: −50 млн ₸/год с одного решения, ×1,5 скорость разработки",
+        "Корпоративный портал: 6000+ пользователей, NPS 80+",
+        "Цифровая повестка для CEO / правления",
       ],
     },
     {
@@ -151,36 +313,22 @@ export const resume = {
       role: "Старший системный аналитик",
       company: "ТОО «BI Innovations», Астана",
       description:
-        "ТЗ, тестирование, User Stories, презентации заказчикам.",
-      highlights: ["Scrum · Agile · согласование с бизнесом"],
+        "Переход в IT: требования, user stories, согласование с бизнесом девелопмента. Фундамент для product-роли.",
+      highlights: ["Scrum / Agile · работа с заказчиками из бизнеса"],
     },
     {
-      period: "мар 2018 — сен 2019",
-      role: "Инженер-сметчик",
-      company: "BI Group, Астана",
-      description: "Сметы, объёмы работ, документация.",
+      period: "2010 — 2019",
+      role: "Инженер ПТО · сметчик",
+      company: "BI Group · Замандас-Темиртау · Градстрой 2030",
+      description:
+        "Производство, подрядчики, сметы, ввод объектов. Отраслевой контекст строительства и девелопмента — основа для цифровизации.",
       highlights: [],
     },
-    {
-      period: "май 2013 — мар 2018",
-      role: "Инженер ПТО",
-      company: "ТОО «Замандас-Темиртау»",
-      description: "Акты, подрядчики, производство работ.",
-      highlights: [],
-    },
-    {
-      period: "окт 2010 — дек 2012",
-      role: "Инженер ПТО",
-      company: "ТОО «Градстрой 2030»",
-      description: "Чертежи, ввод объектов в эксплуатацию.",
-      highlights: [],
-    },
-  ] satisfies Experience[],
-
+  ],
   education: [
     {
-      period: "2024 — 2025",
-      title: "MBA",
+      period: "2024 — 2026",
+      title: "MBA — Менеджмент и экономика бизнеса",
       note: "KBTU Business School, Алматы",
     },
     {
@@ -194,38 +342,14 @@ export const resume = {
       note: "Колледж инновационных технологий",
     },
   ],
-
   certificates: [
     {
-      id: "oracle-primavera",
-      year: "2025",
-      title: "Oracle Primavera Cloud",
-      issuer: "PMI Kazakhstan · UPM RK",
-      detail: "2 PDUs · 18.08.2025",
-      image: "/certificates/oracle-primavera-cloud.png",
-    },
-    {
-      id: "product-bee",
-      year: "2025",
-      title: "Junior Product Manager",
-      issuer: "Product Bee Inc.",
-      detail: "8 weeks · 11.08.2025",
-      image: "/certificates/product-bee-junior-pm.png",
-    },
-    {
-      id: "agile-scrum",
-      year: "2024",
-      title: "Agile · Scrum · SAFe · Kanban",
-      issuer: "AgilePM.kz",
-      detail: "№ APM241220",
-      image: "/certificates/agile-scrum-safe-kanban.png",
-    },
-    {
-      id: "pmi-master",
-      year: "2024",
-      title: "Project Management Master Class",
-      issuer: "PMI Kazakhstan",
-      image: "/certificates/pmi-master-class.png",
+      id: "mba-kbtu",
+      year: "2026",
+      title: "MBA — Менеджмент и экономика бизнеса",
+      issuer: "KBTU · Казахско-Британский технический университет",
+      detail: "7M04116 · MBA № 00048657926 · 15.07.2026",
+      image: certificateImages.mba,
     },
     {
       id: "pmbok",
@@ -233,42 +357,299 @@ export const resume = {
       title: "PMBOK® Guide 7th Edition",
       issuer: "СПМ РК · PMI",
       detail: "35 PDUs",
-      image: "/certificates/pmbok-pmi-upm.png",
-    },
-  ] satisfies Certificate[],
-
-  otherCredentials: [
-    { year: "2022", title: "PreMBA", issuer: "BI University" },
-  ] satisfies Credential[],
-
-  contact: [
-    {
-      label: "bekmuhanbetov24@gmail.com",
-      href: "mailto:bekmuhanbetov24@gmail.com",
-      type: "email",
+      image: certificateImages.pmbok,
     },
     {
-      label: "+7 (707) 131-20-44",
-      href: "tel:+77071312044",
-      type: "phone",
+      id: "pmi-master",
+      year: "2024",
+      title: "Project Management Master Class",
+      issuer: "PMI Kazakhstan",
+      image: certificateImages.pmi,
     },
     {
-      label: "Telegram @Bekmuhanbetov",
-      href: "https://t.me/Bekmuhanbetov",
-      type: "telegram",
+      id: "oracle-primavera",
+      year: "2025",
+      title: "Oracle Primavera Cloud",
+      issuer: "PMI Kazakhstan · UPM RK",
+      detail: "2 PDUs · 18.08.2025",
+      image: certificateImages.oracle,
     },
     {
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/bekmukhanbetov/",
-      type: "linkedin",
+      id: "agile-scrum",
+      year: "2024",
+      title: "Agile · Scrum · SAFe · Kanban",
+      issuer: "AgilePM.kz",
+      detail: "№ APM241220",
+      image: certificateImages.agile,
     },
-  ] satisfies ContactLink[],
+    {
+      id: "product-bee-middle",
+      year: "2026",
+      title: "Middle & Senior Product Manager",
+      issuer: "Product Bee Inc.",
+      detail: "8 weeks · 12.05.2026",
+      image: certificateImages.middle,
+    },
+    {
+      id: "product-bee",
+      year: "2025",
+      title: "Junior Product Manager",
+      issuer: "Product Bee Inc.",
+      detail: "8 weeks · 11.08.2025",
+      image: certificateImages.junior,
+    },
+  ],
+  otherCredentials: [],
+  contact,
 };
 
-export const skillCategories: Record<Skill["category"], string> = {
-  pm: "Project Management",
-  analytics: "Аналитика",
-  tools: "Инструменты",
-  tech: "Technology",
-  languages: "Языки",
+const en: ResumeCopy = {
+  meta: {
+    pageTitle: "Artur Bekmukhanbetov — Product Owner · CTO · CIO",
+    tagline: "Real estate development digitalization",
+  },
+  ui: {
+    langRu: "RU",
+    langEn: "EN",
+    printPdf: "PDF / print",
+    share: "Share",
+    shareCopied: "Link copied",
+    printSummary: "Summary",
+    printSkills: "Skills",
+    write: "Email",
+    swipe: "Arrows or swipe",
+    prev: "Previous",
+    next: "Next",
+    moreCreds: "Additional",
+    proofTitle: "Press and research",
+    casesOverline: "Impact",
+    casesTitle: "Cases",
+    casesLead: "Four initiatives where digital changed real estate development: goal, scale, outcome.",
+    caseMandate: "Goal",
+    caseScale: "Scale",
+    caseResult: "Outcome",
+    caseRole: "Role",
+    expOverline: "Career",
+    expTitle: "Experience",
+    expLead: "IT and product in depth. Nine years in construction — industry context, not the main headline.",
+    credsOverline: "Education",
+    credsTitle: "Education and certificates",
+    credsLead: "MBA and PMI lead the carousel. Skills as tags — no self-rated percentages.",
+    eduTitle: "Education",
+    contactOverline: "Contact",
+    contactTitle: "Contact",
+  },
+  profile: {
+    name: "Bekmukhanbetov Artur Musayevich",
+    nameShort: "Artur Bekmukhanbetov",
+    role: "Product Owner · CTO · CIO",
+    roleSub: "Real estate development digitalization · products and platforms",
+    location: "Astana, Kazakhstan",
+    status: "Open to opportunities",
+    avatarUrl: "/photo.jpg",
+    summary:
+      "Product Owner and IT project lead in real estate development. 15 years in the industry — from site operations to holding-wide digitalization; 6+ in IT. I run products end to end: initiation, architecture, team, production, and scale. I can also own the full digitalization stream — initiative portfolio, teams of 3–20, vendors, CEO and board reporting. Deliverables are live services with measurable business impact, not slide decks.",
+    languages: "Russian — working · English — basic",
+    highlights: [
+      "Development · digital",
+      "6,000+ users · NPS 80+",
+      "End-to-end · to production",
+    ],
+  },
+  stats: [
+    { label: "Development", value: "15+", hint: "years in industry" },
+    { label: "IT / product", value: "6+", hint: "years" },
+    { label: "Teams", value: "3–20", hint: "people" },
+    { label: "RPA", value: "−50m", hint: "₸/year · one solution" },
+  ],
+  nav: [
+    { id: "mandate", label: "About", shortLabel: "About", icon: "◈" },
+    { id: "impact", label: "Impact", shortLabel: "Impact", icon: "◇" },
+    { id: "experience", label: "Experience", shortLabel: "Career", icon: "▤" },
+    { id: "credentials", label: "Creds", shortLabel: "Creds", icon: "◆" },
+    { id: "contact", label: "Contact", shortLabel: "Contact", icon: "✉" },
+  ],
+  featured: [
+    {
+      label: "Forbes — migrating a holding to a domestic RPA platform",
+      href: "https://forbes.kz/articles/kak-kazahstanskiy-stroitelnyy-holding-perehodil-na-otechestvennuyu-rpa-platformu",
+      type: "press",
+    },
+    {
+      label: "Research paper — digitalization in construction",
+      href: "https://ojs.publisher.agency/index.php/MSC/issue/view/122",
+      type: "research",
+    },
+  ],
+  cases: [
+    {
+      id: "portfolio",
+      title: "IT project portfolio",
+      mandate:
+        "Unify digitalization initiatives — internal platforms and products for external users — into one view of priorities, status, and escalation.",
+      scale: "Development holding · teams of 3–20 plus vendors · internal services and B2B streams",
+      result:
+        "A managed portfolio instead of ad-hoc IT requests. Includes partner-facing products: digital workflows linking the developer, construction contractors, and post-handover service companies.",
+      contribution:
+        "Portfolio governance: prioritization, status reviews, balance between internal platforms and external B2B products in the ecosystem.",
+    },
+    {
+      id: "land-planner",
+      title: "Developer land asset management platform",
+      mandate:
+        "Unify every land-plot workflow for the developer in one product — replacing scattered Excel files, spreadsheets, and approval chains.",
+      scale:
+        "Development department managers · map-based single console · live product, scaling to the international stream inside the company",
+      result:
+        "Shipped in one year: the Land Planner product in production — plots on a map, all processes in one place, −50% manager effort. Now evolving as the international stream.",
+      contribution:
+        "From initiation and solution architecture through design sign-off and production handover. End-to-end product ownership; registered copyright for Land Planner.",
+    },
+    {
+      id: "rpa",
+      title: "Domestic RPA platform",
+      mandate:
+        "Reduce foreign-stack lock-in and automation cost for construction and corporate processes — without stopping operations.",
+      scale: "Holding IT ecosystem · internal teams and vendors",
+      result: "−50m ₸/year saved from a single solution, 1.5× delivery speed. Covered by Forbes.",
+      contribution:
+        "Platform selection, vendor management, business case to leadership and the board.",
+    },
+    {
+      id: "portal",
+      title: "Corporate portal",
+      mandate:
+        "Clear tech debt and turn the portal into a service 6,000+ employees actually use.",
+      scale: "Entire holding · HR and business functions",
+      result: "NPS 80+ on the people-review loop.",
+      contribution:
+        "Backlog prioritization, stakeholder management, iterative delivery, service quality.",
+    },
+  ],
+  skillTags: [
+    "Real estate development digitalization",
+    "Product ownership",
+    "Project portfolio",
+    "Teams of 3–20",
+    "CTO / platforms",
+    "RPA & automation",
+    "Agile · Scrum · SAFe",
+    "Stakeholders · board",
+    "Power BI · 1C",
+    "AI / Cursor",
+  ],
+  experience: [
+    {
+      period: "Jan 2022 — present",
+      role: "IT Project Lead · Product Owner",
+      company: "BI Innovations LLP, Astana",
+      description:
+        "Digitalization of the holding's development stream: key products and platforms, initiative portfolio, teams and vendors, escalation to the CEO and the board.",
+      highlights: [
+        "IT project portfolio: shared priorities, status and escalation",
+        "Teams of 3 to 20 plus vendors",
+        "Land asset platform (Land Planner): Excel → map, −50% manager effort; copyright holder; international stream",
+        "RPA platform: −50m ₸/year from a single solution, 1.5× delivery speed",
+        "Corporate portal: 6,000+ users, NPS 80+",
+        "Digital agenda for the CEO / board",
+      ],
+    },
+    {
+      period: "Oct 2019 — Dec 2021",
+      role: "Senior systems analyst",
+      company: "BI Innovations LLP, Astana",
+      description:
+        "Move into IT: requirements, user stories, alignment with development business owners. Foundation for the product role.",
+      highlights: ["Scrum / Agile · business stakeholder work"],
+    },
+    {
+      period: "2010 — 2019",
+      role: "Site engineer · estimator",
+      company: "BI Group · Zamandas-Temirtau · Gradstroy 2030",
+      description:
+        "Production, contractors, estimates, commissioning. Construction and development industry context — the foundation for digitalization work.",
+      highlights: [],
+    },
+  ],
+  education: [
+    {
+      period: "2024 — 2026",
+      title: "MBA — Management and Business Economics",
+      note: "KBTU Business School, Almaty",
+    },
+    {
+      period: "2014",
+      title: "MSc, Civil Engineering",
+      note: "KazADI named after L.B. Goncharov",
+    },
+    {
+      period: "2012",
+      title: "Bachelor, Finance",
+      note: "College of Innovative Technologies",
+    },
+  ],
+  certificates: [
+    {
+      id: "mba-kbtu",
+      year: "2026",
+      title: "MBA — Management and Business Economics",
+      issuer: "KBTU · Kazakh-British Technical University",
+      detail: "7M04116 · MBA No. 00048657926 · 15.07.2026",
+      image: certificateImages.mba,
+    },
+    {
+      id: "pmbok",
+      year: "2023",
+      title: "PMBOK® Guide 7th Edition",
+      issuer: "UPM RK · PMI",
+      detail: "35 PDUs",
+      image: certificateImages.pmbok,
+    },
+    {
+      id: "pmi-master",
+      year: "2024",
+      title: "Project Management Master Class",
+      issuer: "PMI Kazakhstan",
+      image: certificateImages.pmi,
+    },
+    {
+      id: "oracle-primavera",
+      year: "2025",
+      title: "Oracle Primavera Cloud",
+      issuer: "PMI Kazakhstan · UPM RK",
+      detail: "2 PDUs · 18.08.2025",
+      image: certificateImages.oracle,
+    },
+    {
+      id: "agile-scrum",
+      year: "2024",
+      title: "Agile · Scrum · SAFe · Kanban",
+      issuer: "AgilePM.kz",
+      detail: "No. APM241220",
+      image: certificateImages.agile,
+    },
+    {
+      id: "product-bee-middle",
+      year: "2026",
+      title: "Middle & Senior Product Manager",
+      issuer: "Product Bee Inc.",
+      detail: "8 weeks · 12.05.2026",
+      image: certificateImages.middle,
+    },
+    {
+      id: "product-bee",
+      year: "2025",
+      title: "Junior Product Manager",
+      issuer: "Product Bee Inc.",
+      detail: "8 weeks · 11.08.2025",
+      image: certificateImages.junior,
+    },
+  ],
+  otherCredentials: [],
+  contact,
 };
+
+export const resumeByLocale: Record<Locale, ResumeCopy> = { ru, en };
+
+/** Default locale copy — use `useLocale()` in UI. */
+export const resume = ru;

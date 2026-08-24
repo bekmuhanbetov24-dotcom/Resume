@@ -1,4 +1,6 @@
-import { resume, type NavId } from "../data/resume";
+import type { NavId } from "../data/resume";
+import { useLocale } from "../locale";
+import { LangToggle } from "./LangToggle";
 import { ProfilePhoto } from "./ui";
 
 interface SidebarProps {
@@ -7,24 +9,26 @@ interface SidebarProps {
 }
 
 export function Sidebar({ active, onNavigate }: SidebarProps) {
+  const { t } = useLocale();
+
   return (
-    <aside className="hidden lg:flex lg:flex-col lg:w-52 xl:w-56 shrink-0 sticky top-0 h-dvh p-5 border-r border-slate-700/40 bg-[#0f1218]/80">
+    <aside className="hidden lg:flex lg:flex-col lg:w-52 xl:w-56 shrink-0 sticky top-0 h-dvh p-5 border-r border-slate-700/40 bg-[#0f1218]/80 no-print">
       <div className="mb-6 flex items-center gap-3">
         <ProfilePhoto
-          name={resume.profile.name}
-          url={resume.profile.avatarUrl || undefined}
+          name={t.profile.name}
+          url={t.profile.avatarUrl || undefined}
           size="sm"
         />
         <div className="min-w-0">
           <p className="text-sm font-semibold text-slate-100 truncate">
-            {resume.profile.nameShort.split(" ")[0]}
+            {t.profile.nameShort.split(" ")[0]}
           </p>
-          <p className="text-[11px] text-slate-500 truncate">Project Manager</p>
+          <p className="text-[11px] text-slate-500 truncate">PO · CTO · CIO</p>
         </div>
       </div>
 
-      <nav className="flex flex-col gap-0.5 flex-1" aria-label="Разделы">
-        {resume.nav.map((item) => {
+      <nav className="flex flex-col gap-0.5 flex-1" aria-label={t.nav[0].label}>
+        {t.nav.map((item) => {
           const isActive = active === item.id;
           return (
             <button
@@ -44,8 +48,9 @@ export function Sidebar({ active, onNavigate }: SidebarProps) {
         })}
       </nav>
 
-      <div className="mt-auto pt-4 border-t border-slate-700/40">
-        <p className="text-[11px] text-slate-500 leading-relaxed">{resume.profile.status}</p>
+      <div className="mt-auto pt-4 border-t border-slate-700/40 space-y-3">
+        <LangToggle />
+        <p className="text-[11px] text-slate-500 leading-relaxed">{t.profile.status}</p>
       </div>
     </aside>
   );

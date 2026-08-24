@@ -1,4 +1,5 @@
-import { resume, type NavId } from "../data/resume";
+import type { NavId } from "../data/resume";
+import { useLocale } from "../locale";
 
 interface MobileNavProps {
   active: NavId;
@@ -6,13 +7,15 @@ interface MobileNavProps {
 }
 
 export function MobileNav({ active, onNavigate }: MobileNavProps) {
+  const { t } = useLocale();
+
   return (
     <nav
-      className="lg:hidden fixed bottom-0 inset-x-0 z-50 border-t border-slate-700/60 bg-[#0f1218]/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)]"
-      aria-label="Навигация"
+      className="lg:hidden fixed bottom-0 inset-x-0 z-50 border-t border-slate-700/60 bg-[#0f1218]/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)] no-print"
+      aria-label="Navigation"
     >
       <ul className="flex max-w-md mx-auto">
-        {resume.nav.map((item) => {
+        {t.nav.map((item) => {
           const isActive = active === item.id;
           return (
             <li key={item.id} className="flex-1 min-w-0">
