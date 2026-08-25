@@ -48,9 +48,8 @@ export function Sidebar({ active, onNavigate }: SidebarProps) {
         })}
       </nav>
 
-      <div className="mt-auto pt-4 border-t border-slate-700/40 space-y-3">
+      <div className="mt-auto pt-4 border-t border-slate-700/40">
         <LangToggle />
-        <p className="text-[11px] text-slate-500 leading-relaxed">{t.profile.status}</p>
       </div>
     </aside>
   );

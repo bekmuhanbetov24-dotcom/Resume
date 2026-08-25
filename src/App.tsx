@@ -1,13 +1,12 @@
 import { useState, type ReactNode } from "react";
 import type { NavId } from "./data/resume";
-import { LocaleProvider, useLocale } from "./locale";
+import { LocaleProvider } from "./locale";
 import { LangToggle } from "./components/LangToggle";
 import { MobileNav } from "./components/MobileNav";
 import { Sidebar } from "./components/Sidebar";
 import { PrintOnePager } from "./components/PrintOnePager";
-import { ShareButton } from "./components/ShareButton";
-import { ContactSection } from "./components/sections/Contact";
 import { CredentialsSection } from "./components/sections/Credentials";
+import { CertificatesSection } from "./components/sections/CertificatesSection";
 import { ExperienceSection } from "./components/sections/Experience";
 import { ImpactSection } from "./components/sections/Impact";
 import { MandateSection } from "./components/sections/Mandate";
@@ -17,7 +16,7 @@ const screens: Record<NavId, () => ReactNode> = {
   impact: () => <ImpactSection />,
   experience: () => <ExperienceSection />,
   credentials: () => <CredentialsSection />,
-  contact: () => <ContactSection />,
+  certificates: () => <CertificatesSection />,
 };
 
 function AppShell() {
@@ -29,8 +28,8 @@ function AppShell() {
       <div className="relative z-10 flex min-h-dvh screen-only">
         <Sidebar active={active} onNavigate={setActive} />
 
-        <main className="flex-1 min-w-0 pb-20 lg:pb-8">
-          <div className="lg:hidden flex items-center justify-end px-4 pt-4 no-print">
+        <main className="flex-1 min-w-0 pb-20 lg:pb-8 relative">
+          <div className="absolute top-6 right-4 sm:right-6 lg:hidden z-20 no-print">
             <LangToggle compact />
           </div>
           <div className="mx-auto max-w-3xl px-4 sm:px-6 py-6 sm:py-8">

@@ -21,7 +21,9 @@ export function PrintOnePager() {
 
       <section>
         <h2>{ui.printSummary}</h2>
-        <p>{profile.summary}</p>
+        <p>{profile.summary.split("\n\n").map((p, i) => (
+          <span key={i}>{i > 0 && <><br /><br /></>}{p}</span>
+        ))}</p>
         <ul className="print-inline-list">
           {profile.highlights.map((h) => (
             <li key={h}>{h}</li>

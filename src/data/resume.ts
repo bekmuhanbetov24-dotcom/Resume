@@ -5,7 +5,7 @@ export type NavId =
   | "impact"
   | "experience"
   | "credentials"
-  | "contact";
+  | "certificates";
 
 export interface Certificate {
   id: string;
@@ -79,6 +79,8 @@ export interface ResumeCopy {
     printSkills: string;
     write: string;
     swipe: string;
+    certHint: string;
+    closeFullscreen: string;
     prev: string;
     next: string;
     moreCreds: string;
@@ -96,6 +98,9 @@ export interface ResumeCopy {
     credsOverline: string;
     credsTitle: string;
     credsLead: string;
+    certsOverline: string;
+    certsTitle: string;
+    certsLead: string;
     eduTitle: string;
     contactOverline: string;
     contactTitle: string;
@@ -171,24 +176,29 @@ const ru: ResumeCopy = {
     printSummary: "О себе",
     printSkills: "Навыки",
     write: "Написать",
-    swipe: "Стрелки или свайп",
+    swipe: "Стрелки или свайп · нажмите для полноэкранного просмотра",
+    certHint: "Сертификаты · нажмите для просмотра на весь экран",
+    closeFullscreen: "Закрыть",
     prev: "Предыдущий",
     next: "Следующий",
     moreCreds: "Дополнительно",
     proofTitle: "В СМИ и науке",
     casesOverline: "Impact",
     casesTitle: "Кейсы",
-    casesLead: "Четыре инициативы, где цифра меняет девелопмент: задача, масштаб, эффект.",
+    casesLead: "Инициативы, где цифра меняет девелопмент: задача, масштаб, эффект.",
     caseMandate: "Задача",
     caseScale: "Масштаб",
     caseResult: "Результат",
     caseRole: "Роль",
     expOverline: "Карьера",
     expTitle: "Опыт",
-    expLead: "IT и продукт — подробно. Девять лет в строительстве — как понимание отрасли, не как основной фокус.",
-    credsOverline: "Education",
-    credsTitle: "Образование и сертификаты",
-    credsLead: "MBA и PMI — в карусели первыми. Навыки — тегами, без самооценки в процентах.",
+    expLead: "Шесть лет в IT и управлении продуктами. Девять лет в строительстве — отраслевой контекст для цифровизации девелопмента.",
+    credsOverline: "Профиль",
+    credsTitle: "Образование и достижения",
+    credsLead: "Образование, публикации и подтверждённая экспертиза в цифровизации девелопмента.",
+    certsOverline: "Обучение",
+    certsTitle: "Сертификаты",
+    certsLead: "PMI, product management и agile — подтверждённые программы профессионального развития.",
     eduTitle: "Образование",
     contactOverline: "Contact",
     contactTitle: "Контакт",
@@ -202,7 +212,7 @@ const ru: ResumeCopy = {
     status: "Открыт к предложениям",
     avatarUrl: "/photo.jpg",
     summary:
-      "Product Owner и руководитель IT-проектов в девелопменте. 15 лет в отрасли — от производства на объектах до цифровизации крупного холдинга; 6+ лет в IT. Веду продукт под ключ: инициация, архитектура, команда, prod и развитие. Могу взять на себя и весь контур цифровизации — портфель инициатив, команды 3–20, подрядчики, отчётность CEO и правлению. На выходе — работающие сервисы с измеримым эффектом, а не презентации.",
+      "IT Project Manager с продуктовым и техническим подходом к управлению. Опыт в строительстве и IT позволяет глубоко понимать бизнес-процессы, находить точки для цифровизации и превращать бизнес-задачи в работающие IT-продукты.\n\nУправляю полным циклом инициатив: от идеи, бизнес-кейса и формирования требований до разработки, MVP, внедрения и масштабирования. Сильные стороны — управление командами, техническое понимание систем, работа с ТОП-менеджментом, приоритизация и оценка экономического эффекта.\n\nФокус — создавать продукты и IT-решения, которые дают измеримый бизнес-результат. Развиваюсь в направлении стратегического управления IT-продуктами.",
     languages: "Русский — рабочий · English — базовый",
     highlights: [
       "Девелопмент · digital",
@@ -213,15 +223,15 @@ const ru: ResumeCopy = {
   stats: [
     { label: "Девелопмент", value: "15+", hint: "лет в отрасли" },
     { label: "IT / продукт", value: "6+", hint: "лет" },
-    { label: "Команды", value: "3–20", hint: "человек" },
+    { label: "Команды", value: "до 20", hint: "человек" },
     { label: "RPA", value: "−50 млн", hint: "₸/год · одно решение" },
   ],
   nav: [
     { id: "mandate", label: "Обо мне", shortLabel: "Обо мне", icon: "◈" },
     { id: "impact", label: "Кейсы", shortLabel: "Кейсы", icon: "◇" },
     { id: "experience", label: "Опыт", shortLabel: "Опыт", icon: "▤" },
-    { id: "credentials", label: "Creds", shortLabel: "Creds", icon: "◆" },
-    { id: "contact", label: "Контакт", shortLabel: "Контакт", icon: "✉" },
+    { id: "credentials", label: "Достижения", shortLabel: "Достиж.", icon: "◆" },
+    { id: "certificates", label: "Сертификаты", shortLabel: "Серт.", icon: "◎" },
   ],
   featured: [
     {
@@ -240,8 +250,8 @@ const ru: ResumeCopy = {
       id: "portfolio",
       title: "Портфель IT-проектов",
       mandate:
-        "Объединить инициативы цифровизации — внутренние платформы и продукты для внешних пользователей — в единый контур: приоритеты, статус, эскалация для руководства.",
-      scale: "Девелоперский холдинг · команды 3–20 и подрядчики · внутренние сервисы и B2B-контуры",
+        "Объединить инициативы цифровизации — внутренние платформы и продукты для внешних пользователей — в единый контур: приоритеты, статус, прозрачность для руководства.",
+      scale: "Девелоперский холдинг · команды до 20 человек · внутренние сервисы и B2B-контуры",
       result:
         "Управляемый портфель вместо разрозненных заказов. В числе потоков — продукты для партнёров за периметром: цифровая связка девелопера, строительных контрагентов и сервисных компаний на сданных объектах.",
       contribution:
@@ -264,7 +274,7 @@ const ru: ResumeCopy = {
       title: "Переход на отечественную RPA-платформу",
       mandate:
         "Снизить зависимость от зарубежного стека и стоимость автоматизации строительных и корпоративных процессов — без остановки операций.",
-      scale: "IT-экосистема холдинга · внутренние команды и подрядчики",
+      scale: "IT-экосистема холдинга · внутренние команды и внешние бизнес-партнёры",
       result: "50 млн ₸/год экономии с одного решения, рост скорости разработки в 1,5 раза. Материал Forbes.",
       contribution:
         "Выбор платформы, управление вендорами, защита решения перед бизнесом и правлением.",
@@ -283,25 +293,27 @@ const ru: ResumeCopy = {
   skillTags: [
     "Цифровизация девелопмента",
     "Product ownership",
+    "IT-стратегия",
+    "Управление командами",
     "Портфель проектов",
-    "Команды 3–20",
+    "Бизнес-кейс и ROI",
     "CTO / платформы",
     "RPA и автоматизация",
     "Agile · Scrum · SAFe",
-    "Стейкхолдеры · правление",
+    "Стейкхолдеры · C-level",
     "Power BI · 1С",
     "AI / Cursor",
   ],
   experience: [
     {
-      period: "янв 2022 — н.в.",
+      period: "2022 — н.в.",
       role: "Руководитель проекта IT · Product Owner",
       company: "ТОО «BI Innovations», Астана",
       description:
-        "Цифровизация девелоперского контура холдинга: ключевые продукты и платформы, портфель инициатив, команды и подрядчики, эскалация на CEO и правление.",
+        "Цифровизация девелоперского контура холдинга: ключевые продукты и платформы, портфель инициатив, команды и работа с внешними бизнес-партнёрами, взаимодействие с CEO и правлением.",
       highlights: [
-        "Портфель IT-проектов: единые приоритеты, статус и эскалация",
-        "Команды от 3 до 20 человек + подрядчики",
+        "Портфель IT-проектов: единые приоритеты и прозрачный статус",
+        "Команды до 20 человек, работа с внешними бизнес-партнёрами",
         "Платформа земельных активов («Land Planner»): Excel → карта, −50% трудозатрат менеджеров; авторское право; международный контур",
         "RPA-платформа: −50 млн ₸/год с одного решения, ×1,5 скорость разработки",
         "Корпоративный портал: 6000+ пользователей, NPS 80+",
@@ -309,7 +321,7 @@ const ru: ResumeCopy = {
       ],
     },
     {
-      period: "окт 2019 — дек 2021",
+      period: "2019 — 2021",
       role: "Старший системный аналитик",
       company: "ТОО «BI Innovations», Астана",
       description:
@@ -344,14 +356,6 @@ const ru: ResumeCopy = {
   ],
   certificates: [
     {
-      id: "mba-kbtu",
-      year: "2026",
-      title: "MBA — Менеджмент и экономика бизнеса",
-      issuer: "KBTU · Казахско-Британский технический университет",
-      detail: "7M04116 · MBA № 00048657926 · 15.07.2026",
-      image: certificateImages.mba,
-    },
-    {
       id: "pmbok",
       year: "2023",
       title: "PMBOK® Guide 7th Edition",
@@ -364,6 +368,7 @@ const ru: ResumeCopy = {
       year: "2024",
       title: "Project Management Master Class",
       issuer: "PMI Kazakhstan",
+      detail: "Master Class · 2024 · Сертификат PMI Kazakhstan",
       image: certificateImages.pmi,
     },
     {
@@ -417,24 +422,29 @@ const en: ResumeCopy = {
     printSummary: "Summary",
     printSkills: "Skills",
     write: "Email",
-    swipe: "Arrows or swipe",
+    swipe: "Arrows or swipe · tap for fullscreen",
+    certHint: "Certificates · tap to view fullscreen",
+    closeFullscreen: "Close",
     prev: "Previous",
     next: "Next",
     moreCreds: "Additional",
     proofTitle: "Press and research",
     casesOverline: "Impact",
     casesTitle: "Cases",
-    casesLead: "Four initiatives where digital changed real estate development: goal, scale, outcome.",
+    casesLead: "Initiatives where digital changed real estate development: goal, scale, outcome.",
     caseMandate: "Goal",
     caseScale: "Scale",
     caseResult: "Outcome",
     caseRole: "Role",
     expOverline: "Career",
     expTitle: "Experience",
-    expLead: "IT and product in depth. Nine years in construction — industry context, not the main headline.",
-    credsOverline: "Education",
-    credsTitle: "Education and certificates",
-    credsLead: "MBA and PMI lead the carousel. Skills as tags — no self-rated percentages.",
+    expLead: "Six years in IT and product leadership. Nine years in construction — industry context for development digitalization.",
+    credsOverline: "Profile",
+    credsTitle: "Education & achievements",
+    credsLead: "Education, publications, and verified expertise in real estate development digitalization.",
+    certsOverline: "Training",
+    certsTitle: "Certificates",
+    certsLead: "PMI, product management, and agile — verified professional development programs.",
     eduTitle: "Education",
     contactOverline: "Contact",
     contactTitle: "Contact",
@@ -448,7 +458,7 @@ const en: ResumeCopy = {
     status: "Open to opportunities",
     avatarUrl: "/photo.jpg",
     summary:
-      "Product Owner and IT project lead in real estate development. 15 years in the industry — from site operations to holding-wide digitalization; 6+ in IT. I run products end to end: initiation, architecture, team, production, and scale. I can also own the full digitalization stream — initiative portfolio, teams of 3–20, vendors, CEO and board reporting. Deliverables are live services with measurable business impact, not slide decks.",
+      "IT Project Manager with a product and technical approach to delivery. Experience in construction and IT enables deep understanding of business processes, spotting digitalization opportunities, and turning business goals into working IT products.\n\nI manage the full initiative lifecycle: from idea, business case, and requirements through development, MVP, rollout, and scale. Strengths include team leadership, technical system fluency, C-level stakeholder work, prioritization, and economic impact assessment.\n\nFocus: products and IT solutions with measurable business outcomes. Growing toward strategic IT product leadership.",
     languages: "Russian — working · English — basic",
     highlights: [
       "Development · digital",
@@ -459,15 +469,15 @@ const en: ResumeCopy = {
   stats: [
     { label: "Development", value: "15+", hint: "years in industry" },
     { label: "IT / product", value: "6+", hint: "years" },
-    { label: "Teams", value: "3–20", hint: "people" },
+    { label: "Teams", value: "up to 20", hint: "people" },
     { label: "RPA", value: "−50m", hint: "₸/year · one solution" },
   ],
   nav: [
     { id: "mandate", label: "About", shortLabel: "About", icon: "◈" },
     { id: "impact", label: "Impact", shortLabel: "Impact", icon: "◇" },
     { id: "experience", label: "Experience", shortLabel: "Career", icon: "▤" },
-    { id: "credentials", label: "Creds", shortLabel: "Creds", icon: "◆" },
-    { id: "contact", label: "Contact", shortLabel: "Contact", icon: "✉" },
+    { id: "credentials", label: "Achievements", shortLabel: "Achiev.", icon: "◆" },
+    { id: "certificates", label: "Certificates", shortLabel: "Certs", icon: "◎" },
   ],
   featured: [
     {
@@ -486,8 +496,8 @@ const en: ResumeCopy = {
       id: "portfolio",
       title: "IT project portfolio",
       mandate:
-        "Unify digitalization initiatives — internal platforms and products for external users — into one view of priorities, status, and escalation.",
-      scale: "Development holding · teams of 3–20 plus vendors · internal services and B2B streams",
+        "Unify digitalization initiatives — internal platforms and products for external users — into one view of priorities, status, and transparency for leadership.",
+      scale: "Development holding · teams up to 20 people · internal services and B2B streams",
       result:
         "A managed portfolio instead of ad-hoc IT requests. Includes partner-facing products: digital workflows linking the developer, construction contractors, and post-handover service companies.",
       contribution:
@@ -510,7 +520,7 @@ const en: ResumeCopy = {
       title: "Domestic RPA platform",
       mandate:
         "Reduce foreign-stack lock-in and automation cost for construction and corporate processes — without stopping operations.",
-      scale: "Holding IT ecosystem · internal teams and vendors",
+      scale: "Holding IT ecosystem · internal teams and external business partners",
       result: "−50m ₸/year saved from a single solution, 1.5× delivery speed. Covered by Forbes.",
       contribution:
         "Platform selection, vendor management, business case to leadership and the board.",
@@ -529,25 +539,27 @@ const en: ResumeCopy = {
   skillTags: [
     "Real estate development digitalization",
     "Product ownership",
+    "IT strategy",
+    "Team leadership",
     "Project portfolio",
-    "Teams of 3–20",
+    "Business case & ROI",
     "CTO / platforms",
     "RPA & automation",
     "Agile · Scrum · SAFe",
-    "Stakeholders · board",
+    "Stakeholders · C-level",
     "Power BI · 1C",
     "AI / Cursor",
   ],
   experience: [
     {
-      period: "Jan 2022 — present",
+      period: "2022 — present",
       role: "IT Project Lead · Product Owner",
       company: "BI Innovations LLP, Astana",
       description:
-        "Digitalization of the holding's development stream: key products and platforms, initiative portfolio, teams and vendors, escalation to the CEO and the board.",
+        "Digitalization of the holding's development stream: key products and platforms, initiative portfolio, teams, and external business partners; engagement with the CEO and the board.",
       highlights: [
-        "IT project portfolio: shared priorities, status and escalation",
-        "Teams of 3 to 20 plus vendors",
+        "IT project portfolio: shared priorities and transparent status",
+        "Teams up to 20 people; external business partners",
         "Land asset platform (Land Planner): Excel → map, −50% manager effort; copyright holder; international stream",
         "RPA platform: −50m ₸/year from a single solution, 1.5× delivery speed",
         "Corporate portal: 6,000+ users, NPS 80+",
@@ -555,7 +567,7 @@ const en: ResumeCopy = {
       ],
     },
     {
-      period: "Oct 2019 — Dec 2021",
+      period: "2019 — 2021",
       role: "Senior systems analyst",
       company: "BI Innovations LLP, Astana",
       description:
@@ -590,14 +602,6 @@ const en: ResumeCopy = {
   ],
   certificates: [
     {
-      id: "mba-kbtu",
-      year: "2026",
-      title: "MBA — Management and Business Economics",
-      issuer: "KBTU · Kazakh-British Technical University",
-      detail: "7M04116 · MBA No. 00048657926 · 15.07.2026",
-      image: certificateImages.mba,
-    },
-    {
       id: "pmbok",
       year: "2023",
       title: "PMBOK® Guide 7th Edition",
@@ -610,6 +614,7 @@ const en: ResumeCopy = {
       year: "2024",
       title: "Project Management Master Class",
       issuer: "PMI Kazakhstan",
+      detail: "Master Class · 2024 · PMI Kazakhstan certificate",
       image: certificateImages.pmi,
     },
     {

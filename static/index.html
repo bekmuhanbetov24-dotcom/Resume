@@ -45,8 +45,25 @@
     .sidebar-status { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.05); font-size: .75rem; color: #71717a; }
     main { flex: 1; min-width: 0; padding-bottom: 5.5rem; }
     @media (min-width: 1024px) { main { padding-bottom: 2rem; } }
-    .content { max-width: 48rem; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+    .content { position: relative; max-width: 48rem; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
     @media (min-width: 640px) { .content { padding: 1.5rem 1.25rem 2.5rem; } }
+    .lang-float { position: absolute; top: 1.5rem; right: 1rem; z-index: 20; }
+    @media (min-width: 1024px) { .lang-float { display: none; } }
+    .page-header { margin-bottom: 1rem; padding-right: 3.5rem; }
+    @media (min-width: 1024px) { .page-header { padding-right: 0; } }
+    .page-body { padding-right: 3.5rem; }
+    .page-body--mandate { padding-top: 2.75rem; }
+    @media (min-width: 1024px) {
+      .page-header { padding-right: 0; }
+      .page-body { padding-right: 0; }
+      .page-body--mandate { padding-top: 0; }
+    }
+    .screen-stack { display: flex; flex-direction: column; gap: .75rem; }
+    @media (min-width: 640px) { .screen-stack { gap: 1rem; } }
+    .screen-stack > .card { margin-bottom: 0; }
+    .card-subtitle { margin: 0 0 .75rem; font-size: .875rem; font-weight: 600; color: #e2e8f0; }
+    .field-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: rgba(96,165,250,.8); margin: 0; }
+    .field-label.muted { color: #64748b; }
     .card {
       background: #161b24; border: 1px solid rgba(148,163,184,.12);
       border-radius: .75rem; padding: 1rem 1.25rem; margin-bottom: 1rem;
@@ -89,7 +106,20 @@
     .stat-hint { font-size: .6875rem; color: #64748b; margin: .125rem 0 0; }
     h2 { margin: 0; font-size: 1.125rem; font-weight: 600; color: #f4f4f5; }
     .section-desc { margin: .25rem 0 1rem; font-size: .875rem; color: #94a3b8; line-height: 1.5; }
-    .summary { font-size: .9375rem; line-height: 1.6; color: #94a3b8; margin: 1.25rem 0 0; padding-top:1.25rem; border-top:1px solid rgba(100,116,139,.2); }
+    .summary-block { margin: 1.25rem 0 0; padding-top: 1.25rem; border-top: 1px solid rgba(100,116,139,.2); }
+    .summary { font-size: .9375rem; line-height: 1.6; color: #94a3b8; margin: 0 0 .75rem; }
+    .summary-block .summary:last-child { margin-bottom: 0; }
+    .contact-icons { display: flex; align-items: center; gap: .5rem; }
+    .contact-icon-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.25rem; height: 2.25rem; border-radius: .5rem;
+      border: 1px solid rgba(100,116,139,.45); background: rgba(15,23,42,.5);
+      color: #94a3b8; text-decoration: none; transition: border-color .2s, color .2s, background .2s;
+    }
+    .contact-icon-btn:hover { border-color: rgba(59,130,246,.45); color: #e2e8f0; background: rgba(59,130,246,.12); }
+    .contact-icon-btn svg { width: 1.125rem; height: 1.125rem; }
+    .cta-divider { display: none; width: 1px; height: 1.5rem; background: rgba(100,116,139,.4); flex-shrink: 0; }
+    @media (min-width: 640px) { .cta-divider { display: block; } }
     .featured-link { display:flex;gap:.75rem;padding:.625rem .75rem;border-radius:.5rem;border:1px solid rgba(100,116,139,.25);background:rgba(30,41,59,.3);text-decoration:none;color:#cbd5e1;font-size:.875rem; }
     .featured-list { display:flex;flex-direction:column;gap:.5rem;margin-top:.75rem; }
     .featured-tag { font-size:10px;font-weight:600;text-transform:uppercase;color:#60a5fa;width:3.5rem;flex-shrink:0; }
@@ -123,8 +153,6 @@
     .contact-type { font-size: .75rem; color: #71717a; margin: 0; text-transform: capitalize; }
     .contact-label { font-size: .875rem; font-weight: 500; color: #e4e4e7; margin: .125rem 0 0; }
     .footer-note { text-align: center; margin-top: 1.5rem; font-size: .75rem; color: #52525b; }
-    .mob-top { display:flex; justify-content:flex-end; padding:1rem 1rem 0; }
-    @media (min-width: 1024px) { .mob-top { display:none; } }
     .mob-nav {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
       display: flex; border-top: 1px solid rgba(255,255,255,.1);
@@ -141,10 +169,21 @@
     .lang-toggle { display:inline-flex; border:1px solid rgba(148,163,184,.25); border-radius:.375rem; overflow:hidden; }
     .lang-toggle button { border:0; background:none; color:#64748b; font-size:11px; font-weight:500; padding:.25rem .5rem; cursor:pointer; }
     .lang-toggle button.active { background:rgba(37,99,235,.2); color:#93c5fd; }
-    .cert-carousel-viewport { overflow:hidden; width:100%; background:#0a0d12; min-height:220px; max-height:min(52vh,420px); touch-action:pan-y; }
-    .cert-carousel-track { display:flex; width:100%; transition:transform .35s cubic-bezier(.4,0,.2,1); }
-    .cert-carousel-slide { box-sizing:border-box; flex:0 0 100%; width:100%; min-width:100%; max-width:100%; display:flex; align-items:center; justify-content:center; padding:.75rem; min-height:220px; }
-    .cert-carousel-slide img { max-width:100%; max-height:min(48vh,400px); width:auto; height:auto; object-fit:contain; border-radius:.375rem; }
+    .cert-carousel-viewport { overflow:hidden; width:100%; background:#0a0d12; height:min(52vh,420px); min-height:220px; touch-action:pan-y; }
+    .cert-carousel-track { display:flex; height:100%; width:100%; transition:transform .35s cubic-bezier(.4,0,.2,1); }
+    .cert-carousel-slide { box-sizing:border-box; flex:0 0 100%; width:100%; min-width:100%; max-width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:.75rem; }
+    .cert-slide-open { display:flex; align-items:center; justify-content:center; width:100%; height:100%; padding:0; border:0; background:transparent; cursor:zoom-in; }
+    .cert-carousel-slide img { display:block; max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; border-radius:.375rem; pointer-events:none; margin:auto; }
+    .cert-lightbox { position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.94); }
+    .cert-lightbox-stage { display:flex; align-items:center; justify-content:center; width:100%; height:100%; padding:3rem 3.5rem; touch-action:pan-y; }
+    .cert-lightbox-stage img { display:block; max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; }
+    .cert-lightbox-close { position:fixed; top:1rem; right:1rem; z-index:102; width:2.75rem; height:2.75rem; border:0; border-radius:999px; background:rgba(15,23,42,.85); color:#e2e8f0; font-size:1.75rem; line-height:1; cursor:pointer; }
+    .cert-lightbox-close:hover { background:rgba(51,65,85,.95); }
+    .cert-lightbox-arrow { position:fixed; top:50%; z-index:101; transform:translateY(-50%); width:2.75rem; height:2.75rem; border:0; border-radius:999px; background:rgba(15,23,42,.75); color:#e2e8f0; font-size:1.25rem; cursor:pointer; }
+    .cert-lightbox-arrow:hover { background:rgba(51,65,85,.9); }
+    .cert-lightbox-arrow--left { left:1rem; }
+    .cert-lightbox-arrow--right { right:1rem; }
+    .section-overline { font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:#64748b; margin:0 0 .5rem; }
     .cert-caption { padding:1rem 1.25rem; border-top:1px solid rgba(100,116,139,.25); background:rgba(15,23,42,.4); }
     .cert-caption h3 { margin:.25rem 0 0; font-size:1rem; color:#f1f5f9; line-height:1.35; }
     .cert-caption .issuer { margin:.25rem 0 0; font-size:.875rem; color:#94a3b8; }
@@ -196,8 +235,10 @@
   <div class="layout no-print">
     <aside class="sidebar" id="sidebar"></aside>
     <main>
-      <div class="mob-top"><div id="lang-mobile"></div></div>
-      <div class="content" id="app"></div>
+      <div class="content">
+        <div class="lang-float no-print" id="lang-mobile"></div>
+        <div id="app"></div>
+      </div>
     </main>
   </div>
   <nav class="mob-nav no-print" id="mob-nav" aria-label="Navigation"></nav>
@@ -209,12 +250,17 @@
         meta: { pageTitle: "Артур Бекмуханбетов — Product Owner · CTO · CIO" },
         ui: {
           write: "Написать", printPdf: "PDF / печать", share: "Поделиться", shareCopied: "Ссылка скопирована",
-          printSummary: "О себе", printSkills: "Навыки", swipe: "Стрелки или свайп",
-          proofTitle: "В СМИ и науке", casesTitle: "Кейсы",
-          casesLead: "Четыре инициативы, где цифра меняет девелопмент: задача, масштаб, эффект.",
+          printSummary: "О себе", printSkills: "Навыки", swipe: "Стрелки или свайп · нажмите для полноэкранного просмотра",
+          certHint: "Сертификаты · нажмите для просмотра на весь экран", closeFullscreen: "Закрыть",
+          prev: "Назад", next: "Далее",
+          proofTitle: "В СМИ и науке", casesOverline: "Impact", casesTitle: "Кейсы",
+          casesLead: "Инициативы, где цифра меняет девелопмент: задача, масштаб, эффект.",
           caseMandate: "Задача", caseScale: "Масштаб", caseResult: "Результат", caseRole: "Роль",
-          expTitle: "Опыт", expLead: "IT и продукт — подробно. Девять лет в строительстве — как понимание отрасли, не как основной фокус.",
-          credsTitle: "Образование и сертификаты", credsLead: "MBA и PMI — в карусели первыми. Навыки — тегами, без самооценки в процентах.",
+          expOverline: "Карьера", expTitle: "Опыт", expLead: "Шесть лет в IT и управлении продуктами. Девять лет в строительстве — отраслевой контекст для цифровизации девелопмента.",
+          credsOverline: "Профиль", credsTitle: "Образование и достижения",
+          credsLead: "Образование, публикации и подтверждённая экспертиза в цифровизации девелопмента.",
+          certsOverline: "Обучение", certsTitle: "Сертификаты",
+          certsLead: "PMI, product management и agile — подтверждённые программы профессионального развития.",
           eduTitle: "Образование", contactTitle: "Контакт"
         },
         profile: {
@@ -225,39 +271,43 @@
           location: "Астана, Казахстан",
           status: "Открыт к предложениям",
           photo: "photo.jpg",
-          summary: "Product Owner и руководитель IT-проектов в девелопменте. 15 лет в отрасли — от производства на объектах до цифровизации крупного холдинга; 6+ лет в IT. Веду продукт под ключ: инициация, архитектура, команда, prod и развитие. Могу взять на себя и весь контур цифровизации — портфель инициатив, команды 3–20, подрядчики, отчётность CEO и правлению. На выходе — работающие сервисы с измеримым эффектом, а не презентации.",
+          summary: "IT Project Manager с продуктовым и техническим подходом к управлению. Опыт в строительстве и IT позволяет глубоко понимать бизнес-процессы, находить точки для цифровизации и превращать бизнес-задачи в работающие IT-продукты.
+
+Управляю полным циклом инициатив: от идеи, бизнес-кейса и формирования требований до разработки, MVP, внедрения и масштабирования. Сильные стороны — управление командами, техническое понимание систем, работа с ТОП-менеджментом, приоритизация и оценка экономического эффекта.
+
+Фокус — создавать продукты и IT-решения, которые дают измеримый бизнес-результат. Развиваюсь в направлении стратегического управления IT-продуктами.",
           languages: "Русский — рабочий · English — базовый",
           highlights: ["Девелопмент · digital", "6000+ пользователей · NPS 80+", "Продукт под ключ · до prod"]
         },
         stats: [
           { label: "Девелопмент", value: "15+", hint: "лет в отрасли" },
           { label: "IT / продукт", value: "6+", hint: "лет" },
-          { label: "Команды", value: "3–20", hint: "человек" },
+          { label: "Команды", value: "до 20", hint: "человек" },
           { label: "RPA", value: "−50 млн", hint: "₸/год · одно решение" }
         ],
         nav: [
           { id: "mandate", label: "Обо мне", short: "Обо мне", icon: "◈" },
           { id: "impact", label: "Кейсы", short: "Кейсы", icon: "◇" },
           { id: "experience", label: "Опыт", short: "Опыт", icon: "▤" },
-          { id: "credentials", label: "Creds", short: "Creds", icon: "◆" },
-          { id: "contact", label: "Контакт", short: "Контакт", icon: "✉" }
+          { id: "credentials", label: "Достижения", short: "Достиж.", icon: "◆" },
+          { id: "certificates", label: "Сертификаты", short: "Серт.", icon: "◎" }
         ],
         featured: [
           { label: "Forbes — переход на отечественную RPA-платформу", href: "https://forbes.kz/articles/kak-kazahstanskiy-stroitelnyy-holding-perehodil-na-otechestvennuyu-rpa-platformu", type: "press" },
           { label: "Научная публикация — цифровизация в строительстве", href: "https://ojs.publisher.agency/index.php/MSC/issue/view/122", type: "research" }
         ],
         cases: [
-          { title: "Портфель IT-проектов", mandate: "Объединить инициативы цифровизации — внутренние платформы и продукты для внешних пользователей — в единый контур: приоритеты, статус, эскалация для руководства.", scale: "Девелоперский холдинг · команды 3–20 и подрядчики · внутренние сервисы и B2B-контуры", result: "Управляемый портфель вместо разрозненных заказов. В числе потоков — продукты для партнёров за периметром: цифровая связка девелопера, строительных контрагентов и сервисных компаний на сданных объектах.", contribution: "Портфельное управление: приоритизация, status review, баланс внутренних платформ и внешних B2B-продуктов экосистемы." },
+          { title: "Портфель IT-проектов", mandate: "Объединить инициативы цифровизации — внутренние платформы и продукты для внешних пользователей — в единый контур: приоритеты, статус, прозрачность для руководства.", scale: "Девелоперский холдинг · команды до 20 человек · внутренние сервисы и B2B-контуры", result: "Управляемый портфель вместо разрозненных заказов. В числе потоков — продукты для партнёров за периметром: цифровая связка девелопера, строительных контрагентов и сервисных компаний на сданных объектах.", contribution: "Портфельное управление: приоритизация, status review, баланс внутренних платформ и внешних B2B-продуктов экосистемы." },
           { title: "Платформа управления земельными активами девелопера", mandate: "Собрать в одном продукте все процессы работы с земельными участками девелопера — вместо разрозненных Excel-таблиц, файлов и цепочек согласований.", scale: "Менеджеры отдела развития · карта и единая витрина · продукт в проде, масштабируется на международный контур внутри компании", result: "За год — продукт «Land Planner» в эксплуатации: участки на карте, процессы в одном месте, −50% трудозатрат менеджеров. Сейчас развивается как международный контур.", contribution: "От инициации и проектирования архитектуры до утверждения дизайна и передачи в prod. Product ownership end-to-end; зарегистрировал авторское право на «Land Planner»." },
-          { title: "Переход на отечественную RPA-платформу", mandate: "Снизить зависимость от зарубежного стека и стоимость автоматизации строительных и корпоративных процессов — без остановки операций.", scale: "IT-экосистема холдинга · внутренние команды и подрядчики", result: "50 млн ₸/год экономии с одного решения, рост скорости разработки в 1,5 раза. Материал Forbes.", contribution: "Выбор платформы, управление вендорами, защита решения перед бизнесом и правлением." },
+          { title: "Переход на отечественную RPA-платформу", mandate: "Снизить зависимость от зарубежного стека и стоимость автоматизации строительных и корпоративных процессов — без остановки операций.", scale: "IT-экосистема холдинга · внутренние команды и внешние бизнес-партнёры", result: "50 млн ₸/год экономии с одного решения, рост скорости разработки в 1,5 раза. Материал Forbes.", contribution: "Выбор платформы, управление вендорами, защита решения перед бизнесом и правлением." },
           { title: "Корпоративный портал", mandate: "Закрыть техдолг и превратить портал в сервис, которым пользуются 6000+ сотрудников, а не «витрину ради галочки».", scale: "Весь холдинг · HR и бизнес-функции", result: "NPS 80+ на контуре оценки персонала.", contribution: "Приоритизация бэклога, работа со стейкхолдерами, итеративная поставка, контроль качества сервиса." }
         ],
-        skillTags: ["Цифровизация девелопмента", "Product ownership", "Портфель проектов", "Команды 3–20", "CTO / платформы", "RPA и автоматизация", "Agile · Scrum · SAFe", "Стейкхолдеры · правление", "Power BI · 1С", "AI / Cursor"],
+        skillTags: ["Цифровизация девелопмента", "Product ownership", "IT-стратегия", "Управление командами", "Портфель проектов", "Бизнес-кейс и ROI", "CTO / платформы", "RPA и автоматизация", "Agile · Scrum · SAFe", "Стейкхолдеры · C-level", "Power BI · 1С", "AI / Cursor"],
         experience: [
-          { period: "янв 2022 — н.в.", role: "Руководитель проекта IT · Product Owner", company: "ТОО «BI Innovations», Астана",
-            description: "Цифровизация девелоперского контура холдинга: ключевые продукты и платформы, портфель инициатив, команды и подрядчики, эскалация на CEO и правление.",
-            highlights: ["Портфель IT-проектов: единые приоритеты, статус и эскалация", "Команды от 3 до 20 человек + подрядчики", "Платформа земельных активов («Land Planner»): Excel → карта, −50% трудозатрат менеджеров; авторское право; международный контур", "RPA-платформа: −50 млн ₸/год с одного решения, ×1,5 скорость разработки", "Корпоративный портал: 6000+ пользователей, NPS 80+", "Цифровая повестка для CEO / правления"] },
-          { period: "окт 2019 — дек 2021", role: "Старший системный аналитик", company: "ТОО «BI Innovations», Астана",
+          { period: "2022 — н.в.", role: "Руководитель проекта IT · Product Owner", company: "ТОО «BI Innovations», Астана",
+            description: "Цифровизация девелоперского контура холдинга: ключевые продукты и платформы, портфель инициатив, команды и работа с внешними бизнес-партнёрами, взаимодействие с CEO и правлением.",
+            highlights: ["Портфель IT-проектов: единые приоритеты и прозрачный статус", "Команды до 20 человек, работа с внешними бизнес-партнёрами", "Платформа земельных активов («Land Planner»): Excel → карта, −50% трудозатрат менеджеров; авторское право; международный контур", "RPA-платформа: −50 млн ₸/год с одного решения, ×1,5 скорость разработки", "Корпоративный портал: 6000+ пользователей, NPS 80+", "Цифровая повестка для CEO / правления"] },
+          { period: "2019 — 2021", role: "Старший системный аналитик", company: "ТОО «BI Innovations», Астана",
             description: "Переход в IT: требования, user stories, согласование с бизнесом девелопмента. Фундамент для product-роли.", highlights: ["Scrum / Agile · работа с заказчиками из бизнеса"] },
           { period: "2010 — 2019", role: "Инженер ПТО · сметчик", company: "BI Group · Замандас-Темиртау · Градстрой 2030",
             description: "Производство, подрядчики, сметы, ввод объектов. Отраслевой контекст строительства и девелопмента — основа для цифровизации.", highlights: [] }
@@ -268,9 +318,8 @@
           { period: "2012", title: "Бакалавр, финансы", note: "Колледж инновационных технологий" }
         ],
         certificates: [
-          { id: "mba", year: "2026", title: "MBA — Менеджмент и экономика бизнеса", issuer: "KBTU", detail: "7M04116 · MBA № 00048657926 · 15.07.2026", image: "certificates/mba-kbtu.png" },
           { id: "pmbok", year: "2023", title: "PMBOK® Guide 7th Edition", issuer: "СПМ РК · PMI", detail: "35 PDUs", image: "certificates/pmbok-pmi-upm.png" },
-          { id: "pmi", year: "2024", title: "Project Management Master Class", issuer: "PMI Kazakhstan", detail: "", image: "certificates/pmi-master-class.png" },
+          { id: "pmi", year: "2024", title: "Project Management Master Class", issuer: "PMI Kazakhstan", detail: "Master Class · 2024 · Сертификат PMI Kazakhstan", image: "certificates/pmi-master-class.png" },
           { id: "oracle", year: "2025", title: "Oracle Primavera Cloud", issuer: "PMI Kazakhstan · UPM RK", detail: "2 PDUs · 18.08.2025", image: "certificates/oracle-primavera-cloud.png" },
           { id: "agile", year: "2024", title: "Agile · Scrum · SAFe · Kanban", issuer: "AgilePM.kz", detail: "№ APM241220", image: "certificates/agile-scrum-safe-kanban.png" },
           { id: "middle", year: "2026", title: "Middle & Senior Product Manager", issuer: "Product Bee Inc.", detail: "8 weeks · 12.05.2026", image: "certificates/product-bee-middle-senior-pm.png" },
@@ -288,12 +337,17 @@
         meta: { pageTitle: "Artur Bekmukhanbetov — Product Owner · CTO · CIO" },
         ui: {
           write: "Email", printPdf: "PDF / print", share: "Share", shareCopied: "Link copied",
-          printSummary: "Summary", printSkills: "Skills", swipe: "Arrows or swipe",
-          proofTitle: "Press and research", casesTitle: "Cases",
-          casesLead: "Four initiatives where digital changed real estate development: goal, scale, outcome.",
+          printSummary: "Summary", printSkills: "Skills", swipe: "Arrows or swipe · tap for fullscreen",
+          certHint: "Certificates · tap to view fullscreen", closeFullscreen: "Close",
+          prev: "Previous", next: "Next",
+          proofTitle: "Press and research", casesOverline: "Impact", casesTitle: "Cases",
+          casesLead: "Initiatives where digital changed real estate development: goal, scale, outcome.",
           caseMandate: "Goal", caseScale: "Scale", caseResult: "Outcome", caseRole: "Role",
-          expTitle: "Experience", expLead: "IT and product in depth. Nine years in construction — industry context, not the main headline.",
-          credsTitle: "Education and certificates", credsLead: "MBA and PMI lead the carousel. Skills as tags — no self-rated percentages.",
+          expOverline: "Career", expTitle: "Experience", expLead: "Six years in IT and product leadership. Nine years in construction — industry context for development digitalization.",
+          credsOverline: "Profile", credsTitle: "Education & achievements",
+          credsLead: "Education, publications, and verified expertise in real estate development digitalization.",
+          certsOverline: "Training", certsTitle: "Certificates",
+          certsLead: "PMI, product management, and agile — verified professional development programs.",
           eduTitle: "Education", contactTitle: "Contact"
         },
         profile: {
@@ -304,39 +358,43 @@
           location: "Astana, Kazakhstan",
           status: "Open to opportunities",
           photo: "photo.jpg",
-          summary: "Product Owner and IT project lead in real estate development. 15 years in the industry — from site operations to holding-wide digitalization; 6+ in IT. I run products end to end: initiation, architecture, team, production, and scale. I can also own the full digitalization stream — initiative portfolio, teams of 3–20, vendors, CEO and board reporting. Deliverables are live services with measurable business impact, not slide decks.",
+          summary: "IT Project Manager with a product and technical approach to delivery. Experience in construction and IT enables deep understanding of business processes, spotting digitalization opportunities, and turning business goals into working IT products.
+
+I manage the full initiative lifecycle: from idea, business case, and requirements through development, MVP, rollout, and scale. Strengths include team leadership, technical system fluency, C-level stakeholder work, prioritization, and economic impact assessment.
+
+Focus: products and IT solutions with measurable business outcomes. Growing toward strategic IT product leadership.",
           languages: "Russian — working · English — basic",
           highlights: ["Development · digital", "6,000+ users · NPS 80+", "End-to-end · to production"]
         },
         stats: [
           { label: "Development", value: "15+", hint: "years in industry" },
           { label: "IT / product", value: "6+", hint: "years" },
-          { label: "Teams", value: "3–20", hint: "people" },
+          { label: "Teams", value: "up to 20", hint: "people" },
           { label: "RPA", value: "−50m", hint: "₸/year · one solution" }
         ],
         nav: [
           { id: "mandate", label: "About", short: "About", icon: "◈" },
           { id: "impact", label: "Impact", short: "Impact", icon: "◇" },
           { id: "experience", label: "Experience", short: "Career", icon: "▤" },
-          { id: "credentials", label: "Creds", short: "Creds", icon: "◆" },
-          { id: "contact", label: "Contact", short: "Contact", icon: "✉" }
+          { id: "credentials", label: "Achievements", short: "Achiev.", icon: "◆" },
+          { id: "certificates", label: "Certificates", short: "Certs", icon: "◎" }
         ],
         featured: [
           { label: "Forbes — migrating a holding to a domestic RPA platform", href: "https://forbes.kz/articles/kak-kazahstanskiy-stroitelnyy-holding-perehodil-na-otechestvennuyu-rpa-platformu", type: "press" },
           { label: "Research paper — digitalization in construction", href: "https://ojs.publisher.agency/index.php/MSC/issue/view/122", type: "research" }
         ],
         cases: [
-          { title: "IT project portfolio", mandate: "Unify digitalization initiatives — internal platforms and products for external users — into one view of priorities, status, and escalation.", scale: "Development holding · teams of 3–20 plus vendors · internal services and B2B streams", result: "A managed portfolio instead of ad-hoc IT requests. Includes partner-facing products: digital workflows linking the developer, construction contractors, and post-handover service companies.", contribution: "Portfolio governance: prioritization, status reviews, balance between internal platforms and external B2B products in the ecosystem." },
+          { title: "IT project portfolio", mandate: "Unify digitalization initiatives — internal platforms and products for external users — into one view of priorities, status, and transparency for leadership.", scale: "Development holding · teams up to 20 people · internal services and B2B streams", result: "A managed portfolio instead of ad-hoc IT requests. Includes partner-facing products: digital workflows linking the developer, construction contractors, and post-handover service companies.", contribution: "Portfolio governance: prioritization, status reviews, balance between internal platforms and external B2B products in the ecosystem." },
           { title: "Developer land asset management platform", mandate: "Unify every land-plot workflow for the developer in one product — replacing scattered Excel files, spreadsheets, and approval chains.", scale: "Development department managers · map-based single console · live product, scaling to the international stream inside the company", result: "Shipped in one year: the Land Planner product in production — plots on a map, all processes in one place, −50% manager effort. Now evolving as the international stream.", contribution: "From initiation and solution architecture through design sign-off and production handover. End-to-end product ownership; registered copyright for Land Planner." },
-          { title: "Domestic RPA platform", mandate: "Reduce foreign-stack lock-in and automation cost for construction and corporate processes — without stopping operations.", scale: "Holding IT ecosystem · internal teams and vendors", result: "−50m ₸/year saved from a single solution, 1.5× delivery speed. Covered by Forbes.", contribution: "Platform selection, vendor management, business case to leadership and the board." },
+          { title: "Domestic RPA platform", mandate: "Reduce foreign-stack lock-in and automation cost for construction and corporate processes — without stopping operations.", scale: "Holding IT ecosystem · internal teams and external business partners", result: "−50m ₸/year saved from a single solution, 1.5× delivery speed. Covered by Forbes.", contribution: "Platform selection, vendor management, business case to leadership and the board." },
           { title: "Corporate portal", mandate: "Clear tech debt and turn the portal into a service 6,000+ employees actually use.", scale: "Entire holding · HR and business functions", result: "NPS 80+ on the people-review loop.", contribution: "Backlog prioritization, stakeholder management, iterative delivery, service quality." }
         ],
-        skillTags: ["Real estate development digitalization", "Product ownership", "Project portfolio", "Teams of 3–20", "CTO / platforms", "RPA & automation", "Agile · Scrum · SAFe", "Stakeholders · board", "Power BI · 1C", "AI / Cursor"],
+        skillTags: ["Real estate development digitalization", "Product ownership", "IT strategy", "Team leadership", "Project portfolio", "Business case & ROI", "CTO / platforms", "RPA & automation", "Agile · Scrum · SAFe", "Stakeholders · C-level", "Power BI · 1C", "AI / Cursor"],
         experience: [
-          { period: "Jan 2022 — present", role: "IT Project Lead · Product Owner", company: "BI Innovations LLP, Astana",
-            description: "Digitalization of the holding's development stream: key products and platforms, initiative portfolio, teams and vendors, escalation to the CEO and the board.",
-            highlights: ["IT project portfolio: shared priorities, status and escalation", "Teams of 3 to 20 plus vendors", "Land asset platform (Land Planner): Excel → map, −50% manager effort; copyright holder; international stream", "RPA platform: −50m ₸/year from a single solution, 1.5× delivery speed", "Corporate portal: 6,000+ users, NPS 80+", "Digital agenda for the CEO / board"] },
-          { period: "Oct 2019 — Dec 2021", role: "Senior systems analyst", company: "BI Innovations LLP, Astana",
+          { period: "2022 — present", role: "IT Project Lead · Product Owner", company: "BI Innovations LLP, Astana",
+            description: "Digitalization of the holding's development stream: key products and platforms, initiative portfolio, teams, and external business partners; engagement with the CEO and the board.",
+            highlights: ["IT project portfolio: shared priorities and transparent status", "Teams up to 20 people; external business partners", "Land asset platform (Land Planner): Excel → map, −50% manager effort; copyright holder; international stream", "RPA platform: −50m ₸/year from a single solution, 1.5× delivery speed", "Corporate portal: 6,000+ users, NPS 80+", "Digital agenda for the CEO / board"] },
+          { period: "2019 — 2021", role: "Senior systems analyst", company: "BI Innovations LLP, Astana",
             description: "Move into IT: requirements, user stories, alignment with development business owners. Foundation for the product role.", highlights: ["Scrum / Agile · business stakeholder work"] },
           { period: "2010 — 2019", role: "Site engineer · estimator", company: "BI Group · Zamandas-Temirtau · Gradstroy 2030",
             description: "Production, contractors, estimates, commissioning. Construction and development industry context — the foundation for digitalization work.", highlights: [] }
@@ -347,9 +405,8 @@
           { period: "2012", title: "Bachelor, Finance", note: "College of Innovative Technologies" }
         ],
         certificates: [
-          { id: "mba", year: "2026", title: "MBA — Management and Business Economics", issuer: "KBTU", detail: "7M04116 · MBA No. 00048657926 · 15.07.2026", image: "certificates/mba-kbtu.png" },
           { id: "pmbok", year: "2023", title: "PMBOK® Guide 7th Edition", issuer: "UPM RK · PMI", detail: "35 PDUs", image: "certificates/pmbok-pmi-upm.png" },
-          { id: "pmi", year: "2024", title: "Project Management Master Class", issuer: "PMI Kazakhstan", detail: "", image: "certificates/pmi-master-class.png" },
+          { id: "pmi", year: "2024", title: "Project Management Master Class", issuer: "PMI Kazakhstan", detail: "Master Class · 2024 · PMI Kazakhstan certificate", image: "certificates/pmi-master-class.png" },
           { id: "oracle", year: "2025", title: "Oracle Primavera Cloud", issuer: "PMI Kazakhstan · UPM RK", detail: "2 PDUs · 18.08.2025", image: "certificates/oracle-primavera-cloud.png" },
           { id: "agile", year: "2024", title: "Agile · Scrum · SAFe · Kanban", issuer: "AgilePM.kz", detail: "No. APM241220", image: "certificates/agile-scrum-safe-kanban.png" },
           { id: "middle", year: "2026", title: "Middle & Senior Product Manager", issuer: "Product Bee Inc.", detail: "8 weeks · 12.05.2026", image: "certificates/product-bee-middle-senior-pm.png" },
@@ -366,6 +423,13 @@
     };
 
     const icons = { email: "✉", linkedin: "in", telegram: "✈", phone: "☎" };
+    const contactSvg = {
+      email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>',
+      telegram: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>',
+      linkedin: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>'
+    };
+    const contactOrder = ["email", "telegram", "linkedin"];
+    const contactLabels = { email: "Email", telegram: "Telegram", linkedin: "LinkedIn" };
     let shareCopiedTimer = null;
 
     function shareUrl() {
@@ -395,6 +459,8 @@
     let certIndex = 0;
     let touchStartX = 0;
     let certCarouselBound = false;
+    let certFsOpen = false;
+    let certFsKeyHandler = null;
 
     function t() { return COPY[locale]; }
     function esc(s) {
@@ -415,159 +481,247 @@
       return `<div class="avatar" id="avatar-wrap"><img src="${esc(p.photo)}" alt="" onerror="this.style.display='none';this.parentNode.textContent='${ini}'" /></div>`;
     }
 
+    function contactIconsHtml(contact) {
+      return `<div class="contact-icons">${contactOrder.map((type) => {
+        const link = contact.find((c) => c.type === type);
+        if (!link) return "";
+        const external = type !== "email";
+        return `<a class="contact-icon-btn" href="${esc(link.href)}" aria-label="${contactLabels[type]}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>${contactSvg[type]}</a>`;
+      }).join("")}</div>`;
+    }
+
+    function summaryHtml(summary) {
+      const parts = summary.split("\n\n").filter(Boolean);
+      return `<div class="summary-block">${parts.map((p) => `<p class="summary">${esc(p)}</p>`).join("")}</div>`;
+    }
+
+    function featuredHtml(d) {
+      if (!d.featured.length) return "";
+      return `<div class="card"><h3 style="margin:0 0 .75rem;font-size:.875rem;color:#e2e8f0">${esc(d.ui.proofTitle)}</h3>
+        <div class="featured-list">${d.featured.map((f) =>
+          `<a class="featured-link" href="${esc(f.href)}" target="_blank" rel="noopener noreferrer"><span class="featured-tag">${f.type === "press" ? "Press" : "Research"}</span><span>${esc(f.label)} →</span></a>`
+        ).join("")}</div></div>`;
+    }
+
+    function certSlidesHtml(certs, prefix) {
+      return certs.map((c, i) =>
+        `<div class="cert-carousel-slide"><button type="button" class="cert-slide-open" data-cert-i="${i}" data-cert-prefix="${prefix}" aria-label="${esc(c.title)}"><img src="${esc(c.image)}" alt="" draggable="false" /></button></div>`
+      ).join("");
+    }
+
+    function sectionHeader(overline, title, lead) {
+      return `<div class="page-header"><p class="section-overline">${esc(overline)}</p><div class="accent-line"></div><h2>${esc(title)}</h2><p class="section-desc">${esc(lead)}</p></div>`;
+    }
+
     function renderMandate(d) {
       const p = d.profile;
-      const mail = d.contact.find((c) => c.type === "email");
-      const li = d.contact.find((c) => c.type === "linkedin");
-      return `
+      return `<div class="page-body page-body--mandate"><div class="screen-stack">
         <div class="card hero">
           <div class="hero-top"></div>
           <div class="hero-inner">
             ${avatarHtml(p)}
             <div>
               <div class="badges" style="margin-top:0">
-                <span class="badge ok">${esc(p.status)}</span>
                 <span class="badge muted">${esc(p.location)}</span>
               </div>
               <h1>${esc(p.nameShort)}</h1>
               <p class="role">${esc(p.role)}</p>
               <p style="font-size:.875rem;color:#64748b;margin:.25rem 0 0">${esc(p.roleSub)}</p>
               <div class="cta-row">
-                <a class="cta-btn primary" href="${esc(mail.href)}">${esc(d.ui.write)}</a>
-                <a class="cta-btn" href="${esc(li.href)}" target="_blank" rel="noopener">LinkedIn</a>
+                ${contactIconsHtml(d.contact)}
+                <span class="cta-divider" aria-hidden="true"></span>
                 <button type="button" class="cta-btn" onclick="window.print()">${esc(d.ui.printPdf)}</button>
                 <button type="button" class="cta-btn" id="share-btn" onclick="sharePage(this)">${esc(d.ui.share)}</button>
               </div>
             </div>
           </div>
-          <p class="summary">${esc(p.summary)}</p>
+          ${summaryHtml(p.summary)}
           <div class="badges">${p.highlights.map((h) => `<span class="badge">${esc(h)}</span>`).join("")}</div>
         </div>
         <div class="stats">
           ${d.stats.map((s) => `<div class="card stat-card"><p class="stat-val">${esc(s.value)}</p><p class="stat-label">${esc(s.label)}</p>${s.hint ? `<p class="stat-hint">${esc(s.hint)}</p>` : ""}</div>`).join("")}
-        </div>
-        <div class="card">
-          <div class="accent-line"></div>
-          <h2>${esc(d.ui.proofTitle)}</h2>
-          <div class="featured-list">${d.featured.map((f) =>
-            `<a class="featured-link" href="${esc(f.href)}" target="_blank" rel="noopener"><span class="featured-tag">${f.type === "press" ? "Press" : "Research"}</span><span>${esc(f.label)} →</span></a>`
-          ).join("")}</div>
-        </div>`;
+        </div></div></div>`;
     }
 
     function renderImpact(d) {
-      return `<div class="accent-line"></div><h2>${esc(d.ui.casesTitle)}</h2>
-        <p class="section-desc">${esc(d.ui.casesLead)}</p>
-        ${d.cases.map((c) => `<div class="card">
-          <h3 style="margin:0;color:#f1f5f9">${esc(c.title)}</h3>
-          <p class="case-k">${esc(d.ui.caseMandate)}</p><p style="margin:0;color:#94a3b8;font-size:.875rem">${esc(c.mandate)}</p>
-          <p class="case-k muted">${esc(d.ui.caseScale)}</p><p style="margin:0;color:#cbd5e1;font-size:.875rem">${esc(c.scale)}</p>
-          <p class="case-k muted">${esc(d.ui.caseResult)}</p><p style="margin:0;color:#e2e8f0;font-size:.875rem">${esc(c.result)}</p>
-          <p class="case-k muted">${esc(d.ui.caseRole)}</p><p style="margin:0;color:#94a3b8;font-size:.875rem">${esc(c.contribution)}</p>
-        </div>`).join("")}`;
+      return `${sectionHeader(d.ui.casesOverline, d.ui.casesTitle, d.ui.casesLead)}
+        <div class="screen-stack">${d.cases.map((c) => `<div class="card">
+          <h3 style="margin:0;color:#f1f5f9;font-size:1rem">${esc(c.title)}</h3>
+          <p class="field-label" style="margin-top:1rem">${esc(d.ui.caseMandate)}</p><p style="margin:.25rem 0 0;color:#94a3b8;font-size:.875rem;line-height:1.5">${esc(c.mandate)}</p>
+          <p class="field-label muted" style="margin-top:.75rem">${esc(d.ui.caseScale)}</p><p style="margin:.25rem 0 0;color:#cbd5e1;font-size:.875rem">${esc(c.scale)}</p>
+          <p class="field-label muted" style="margin-top:.75rem">${esc(d.ui.caseResult)}</p><p style="margin:.25rem 0 0;color:#e2e8f0;font-size:.875rem">${esc(c.result)}</p>
+          <p class="field-label muted" style="margin-top:.75rem">${esc(d.ui.caseRole)}</p><p style="margin:.25rem 0 0;color:#94a3b8;font-size:.875rem;line-height:1.5">${esc(c.contribution)}</p>
+        </div>`).join("")}</div>`;
     }
 
     function renderExperience(d) {
-      return `<div class="card"><div class="accent-line"></div><h2>${esc(d.ui.expTitle)}</h2>
-        <p class="section-desc">${esc(d.ui.expLead)}</p>
-        <ol class="timeline">${d.experience.map((j) => `
-          <li><p class="period">${esc(j.period)}</p><h3>${esc(j.role)}</h3><p class="company">${esc(j.company)}</p>
-          <p class="desc">${esc(j.description)}</p>
-          ${j.highlights.length ? `<ul>${j.highlights.map((h) => `<li><span>→</span>${esc(h)}</li>`).join("")}</ul>` : ""}</li>`).join("")}
-        </ol></div>`;
+      return `${sectionHeader(d.ui.expOverline, d.ui.expTitle, d.ui.expLead)}
+        <div class="screen-stack">${d.experience.map((j) => `<div class="card">
+          <p class="field-label">${esc(j.period)}</p>
+          <h3 style="margin:.25rem 0 0;font-size:1rem;color:#f4f4f5">${esc(j.role)}</h3>
+          <p class="company" style="margin:.25rem 0 0">${esc(j.company)}</p>
+          <p class="desc" style="margin:.5rem 0 0">${esc(j.description)}</p>
+          ${j.highlights.length ? `<ul style="margin:.75rem 0 0;padding:0;list-style:none">${j.highlights.map((h) => `<li style="display:flex;gap:.5rem;font-size:.875rem;color:#94a3b8;margin-bottom:.375rem"><span style="color:#60a5fa">▸</span>${esc(h)}</li>`).join("")}</ul>` : ""}
+        </div>`).join("")}</div>`;
     }
 
     function renderCredentials(d) {
-      const slides = d.certificates.map((c) =>
-        `<div class="cert-carousel-slide"><img src="${esc(c.image)}" alt="${esc(c.title)}" draggable="false" /></div>`
-      ).join("");
       return `
-        <div class="accent-line"></div><h2>${esc(d.ui.credsTitle)}</h2>
-        <p class="section-desc">${esc(d.ui.credsLead)}</p>
+        ${sectionHeader(d.ui.credsOverline, d.ui.credsTitle, d.ui.credsLead)}
+        <div class="screen-stack">
         <div class="card">
-          <h3 style="margin:0 0 .75rem;font-size:.875rem;color:#e2e8f0">${esc(d.ui.eduTitle)}</h3>
+          <h3 class="card-subtitle">${esc(d.ui.eduTitle)}</h3>
           ${d.education.map((e) => `<div class="edu-item"><p class="period" style="color:#60a5fa;font-size:11px;margin:0">${esc(e.period)}</p>
             <p style="font-weight:500;margin:.25rem 0;font-size:.875rem">${esc(e.title)}</p>
             <p style="font-size:.75rem;color:#64748b;margin:0">${esc(e.note)}</p></div>`).join("")}
           <p style="font-size:.75rem;color:#64748b;margin:1rem 0 .5rem">${esc(d.profile.languages)}</p>
           <div class="badges">${d.skillTags.map((s) => `<span class="badge">${esc(s)}</span>`).join("")}</div>
         </div>
-        <p class="section-desc">${esc(d.ui.swipe)}</p>
-        <div class="card" style="padding:0;overflow:hidden">
-          <div class="cert-carousel-viewport" id="cert-viewport">
-            <div class="cert-carousel-track" id="cert-track">${slides}</div>
+        ${featuredHtml(d)}
+        </div>`;
+    }
+
+    function renderCertificates(d) {
+      return `
+        ${sectionHeader(d.ui.certsOverline, d.ui.certsTitle, d.ui.certsLead)}
+        <div class="screen-stack">
+        <div class="card" style="padding:0;overflow:hidden" id="cert-inline">
+          <div class="cert-carousel-viewport" id="cert-inline-viewport">
+            <div class="cert-carousel-track" id="cert-inline-track">${certSlidesHtml(d.certificates, "inline")}</div>
           </div>
-          <div class="cert-caption" id="cert-caption"></div>
+          <div class="cert-caption" id="cert-inline-caption"></div>
           <div class="cert-controls">
-            <button type="button" class="cert-nav-btn" id="cert-prev" aria-label="Back">←</button>
-            <div class="cert-dots" id="cert-dots"></div>
-            <button type="button" class="cert-nav-btn" id="cert-next" aria-label="Next">→</button>
+            <button type="button" class="cert-nav-btn" id="cert-inline-prev" aria-label="${esc(d.ui.prev || "Back")}">←</button>
+            <div class="cert-dots" id="cert-inline-dots"></div>
+            <button type="button" class="cert-nav-btn" id="cert-inline-next" aria-label="${esc(d.ui.next || "Next")}">→</button>
           </div>
-        </div>
-        <ul style="margin:1rem 0 0;padding:0;list-style:none;color:#64748b;font-size:.875rem">
-          ${d.otherCredentials.map((c) => `<li>${esc(c.year)} · ${esc(c.title)}</li>`).join("")}
-        </ul>`;
+        </div></div>`;
     }
 
-    function renderContact(d) {
-      return `<div class="card"><div class="accent-line"></div><h2>${esc(d.ui.contactTitle)}</h2>
-        <div class="contact-grid">${d.contact.map((c) => `
-          <a class="contact-link" href="${esc(c.href)}" ${c.type !== "email" && c.type !== "phone" ? 'target="_blank" rel="noopener"' : ""}>
-            <span class="contact-icon">${icons[c.type] || "↗"}</span>
-            <div><p class="contact-type">${esc(c.type)}</p><p class="contact-label">${esc(c.label)}</p></div>
-          </a>`).join("")}
-        </div>
-        <p class="footer-note">© ${new Date().getFullYear()} · ${esc(d.profile.name)}</p></div>`;
-    }
-
-    function certTrackOffset() {
-      const viewport = document.getElementById("cert-viewport");
+    function certTrackOffset(viewportId) {
+      const viewport = document.getElementById(viewportId);
       return certIndex * (viewport ? viewport.clientWidth : 0);
     }
 
-    function updateCertSlide() {
+    function updateCertPanel(prefix) {
       const d = t();
-      const track = document.getElementById("cert-track");
-      const caption = document.getElementById("cert-caption");
-      const dots = document.getElementById("cert-dots");
-      if (!track || !caption) return;
+      const track = document.getElementById(`cert-${prefix}-track`);
+      const caption = document.getElementById(`cert-${prefix}-caption`);
+      const dots = document.getElementById(`cert-${prefix}-dots`);
+      if (!track || !caption || !dots) return;
       const c = d.certificates[certIndex];
-      track.style.transform = `translate3d(-${certTrackOffset()}px, 0, 0)`;
+      track.style.transform = `translate3d(-${certTrackOffset(`cert-${prefix}-viewport`)}px, 0, 0)`;
       caption.innerHTML = `<p class="year">${esc(c.year)} · ${certIndex + 1} / ${d.certificates.length}</p>
         <h3>${esc(c.title)}</h3><p class="issuer">${esc(c.issuer)}</p>${c.detail ? `<p class="issuer" style="font-size:.75rem;color:#64748b">${esc(c.detail)}</p>` : ""}`;
       dots.innerHTML = d.certificates.map((_, i) =>
-        `<button type="button" class="cert-dot${i === certIndex ? " active" : ""}" data-i="${i}"></button>`
+        `<button type="button" class="cert-dot${i === certIndex ? " active" : ""}" data-i="${i}" data-prefix="${prefix}"></button>`
       ).join("");
       dots.querySelectorAll(".cert-dot").forEach((el) => {
-        el.addEventListener("click", () => { certIndex = +el.dataset.i; updateCertSlide(); });
+        el.addEventListener("click", () => { certIndex = +el.dataset.i; syncCertViews(); });
       });
-      const prev = document.getElementById("cert-prev");
-      const next = document.getElementById("cert-next");
+      const prev = document.getElementById(`cert-${prefix}-prev`);
+      const next = document.getElementById(`cert-${prefix}-next`);
       if (prev) prev.disabled = certIndex === 0;
       if (next) next.disabled = certIndex === d.certificates.length - 1;
     }
 
+    function syncCertViews() {
+      updateCertPanel("inline");
+      refreshCertLightbox();
+    }
+
+    function closeCertLightbox() {
+      certFsOpen = false;
+      document.body.style.overflow = "";
+      document.getElementById("cert-lightbox")?.remove();
+      if (certFsKeyHandler) {
+        window.removeEventListener("keydown", certFsKeyHandler);
+        certFsKeyHandler = null;
+      }
+    }
+
+    function refreshCertLightbox() {
+      const lb = document.getElementById("cert-lightbox");
+      if (!lb || !certFsOpen) return;
+      const d = t();
+      const c = d.certificates[certIndex];
+      const img = document.getElementById("cert-fs-img");
+      if (img) img.src = c.image;
+      const prev = lb.querySelector(".cert-lightbox-arrow--left");
+      const next = lb.querySelector(".cert-lightbox-arrow--right");
+      if (prev) prev.style.visibility = certIndex === 0 ? "hidden" : "visible";
+      if (next) next.style.visibility = certIndex === d.certificates.length - 1 ? "hidden" : "visible";
+    }
+
+    function openCertLightbox(index) {
+      const d = t();
+      certIndex = index;
+      document.getElementById("cert-lightbox")?.remove();
+      certFsOpen = true;
+      document.body.style.overflow = "hidden";
+      const c = d.certificates[certIndex];
+      const overlay = document.createElement("div");
+      overlay.id = "cert-lightbox";
+      overlay.className = "cert-lightbox";
+      overlay.innerHTML = `
+        <button type="button" class="cert-lightbox-close" aria-label="${esc(d.ui.closeFullscreen)}">×</button>
+        <button type="button" class="cert-lightbox-arrow cert-lightbox-arrow--left" id="cert-fs-prev" aria-label="${esc(d.ui.prev || "Back")}" style="visibility:${certIndex === 0 ? "hidden" : "visible"}">←</button>
+        <div class="cert-lightbox-stage" id="cert-fs-stage"><img id="cert-fs-img" src="${esc(c.image)}" alt="" draggable="false" /></div>
+        <button type="button" class="cert-lightbox-arrow cert-lightbox-arrow--right" id="cert-fs-next" aria-label="${esc(d.ui.next || "Next")}" style="visibility:${certIndex === d.certificates.length - 1 ? "hidden" : "visible"}">→</button>`;
+      document.body.appendChild(overlay);
+      overlay.querySelector(".cert-lightbox-close")?.addEventListener("click", closeCertLightbox);
+      document.getElementById("cert-fs-prev")?.addEventListener("click", () => {
+        if (certIndex > 0) { certIndex--; syncCertViews(); }
+      });
+      document.getElementById("cert-fs-next")?.addEventListener("click", () => {
+        if (certIndex < d.certificates.length - 1) { certIndex++; syncCertViews(); }
+      });
+      const stage = document.getElementById("cert-fs-stage");
+      if (stage) {
+        stage.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        stage.addEventListener("touchend", (e) => {
+          const dx = touchStartX - e.changedTouches[0].clientX;
+          if (dx > 50 && certIndex < d.certificates.length - 1) { certIndex++; syncCertViews(); }
+          else if (dx < -50 && certIndex > 0) { certIndex--; syncCertViews(); }
+        }, { passive: true });
+      }
+      certFsKeyHandler = (e) => {
+        if (e.key === "Escape") closeCertLightbox();
+        if (e.key === "ArrowLeft" && certIndex > 0) { certIndex--; syncCertViews(); }
+        if (e.key === "ArrowRight" && certIndex < d.certificates.length - 1) { certIndex++; syncCertViews(); }
+      };
+      window.addEventListener("keydown", certFsKeyHandler);
+    }
+
+    function updateCertSlide() {
+      updateCertPanel("inline");
+    }
+
     function bindCertCarousel() {
+      closeCertLightbox();
       updateCertSlide();
+      document.querySelectorAll(".cert-slide-open[data-cert-prefix='inline']").forEach((btn) => {
+        btn.addEventListener("click", () => openCertLightbox(+btn.dataset.certI));
+      });
       if (certCarouselBound) return;
       certCarouselBound = true;
-      const viewport = document.getElementById("cert-viewport");
-      document.getElementById("cert-prev")?.addEventListener("click", () => {
-        if (certIndex > 0) { certIndex--; updateCertSlide(); }
+      const viewport = document.getElementById("cert-inline-viewport");
+      document.getElementById("cert-inline-prev")?.addEventListener("click", () => {
+        if (certIndex > 0) { certIndex--; syncCertViews(); }
       });
-      document.getElementById("cert-next")?.addEventListener("click", () => {
-        if (certIndex < t().certificates.length - 1) { certIndex++; updateCertSlide(); }
+      document.getElementById("cert-inline-next")?.addEventListener("click", () => {
+        if (certIndex < t().certificates.length - 1) { certIndex++; syncCertViews(); }
       });
       if (viewport) {
         viewport.addEventListener("touchstart", (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
         viewport.addEventListener("touchend", (e) => {
           const dx = touchStartX - e.changedTouches[0].clientX;
-          if (dx > 50 && certIndex < t().certificates.length - 1) { certIndex++; updateCertSlide(); }
-          else if (dx < -50 && certIndex > 0) { certIndex--; updateCertSlide(); }
+          if (dx > 50 && certIndex < t().certificates.length - 1) { certIndex++; syncCertViews(); }
+          else if (dx < -50 && certIndex > 0) { certIndex--; syncCertViews(); }
         }, { passive: true });
       }
       window.addEventListener("resize", () => {
-        if (activeScreen === "credentials") updateCertSlide();
+        if (activeScreen === "certificates") syncCertViews();
       });
     }
 
@@ -584,7 +738,7 @@
           </header>
           <section>
             <h2>${esc(d.ui.printSummary)}</h2>
-            <p>${esc(p.summary)}</p>
+            ${p.summary.split("\n\n").filter(Boolean).map((para) => `<p>${esc(para)}</p>`).join("")}
             <ul class="print-inline-list">${p.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>
             <dl class="print-stats">${d.stats.map((s) => `<div><dt>${esc(s.label)}</dt><dd>${esc(s.value)}${s.hint ? ` (${esc(s.hint)})` : ""}</dd></div>`).join("")}</dl>
           </section>
@@ -612,7 +766,7 @@
       document.querySelectorAll(".screen").forEach((s) => s.classList.toggle("active", s.dataset.screen === id));
       document.querySelectorAll(".nav-btn, .mob-nav button").forEach((b) => b.classList.toggle("active", b.dataset.id === id));
       window.scrollTo(0, 0);
-      if (id === "credentials") bindCertCarousel();
+      if (id === "certificates") bindCertCarousel();
     }
 
     function bindLang(root) {
@@ -625,6 +779,7 @@
           window.history.replaceState({}, "", url);
           certCarouselBound = false;
           certIndex = 0;
+          closeCertLightbox();
           render();
         });
       });
@@ -632,6 +787,8 @@
 
     function render() {
       const d = t();
+      closeCertLightbox();
+      if (!d.nav.some((n) => n.id === activeScreen)) activeScreen = "mandate";
       document.title = d.meta.pageTitle;
       document.documentElement.lang = locale;
       const p = d.profile;
@@ -639,7 +796,7 @@
       document.getElementById("sidebar").innerHTML = `
         <div><p class="sidebar-name">${esc(p.nameShort.split(" ")[0])}</p><p class="sidebar-role">PO · CTO · CIO</p></div>
         <nav style="flex:1;margin-top:1.5rem">${d.nav.map((n) => `<button type="button" class="nav-btn" data-id="${n.id}"><span class="nav-icon">${n.icon}</span>${esc(n.label)}</button>`).join("")}</nav>
-        <div class="sidebar-status">${langToggleHtml("lang-side")}<p style="margin:.75rem 0 0">${esc(p.status)}</p></div>`;
+        <div class="sidebar-status">${langToggleHtml("lang-side")}</div>`;
 
       document.getElementById("lang-mobile").innerHTML = langToggleHtml("lang-mob");
       document.getElementById("mob-nav").innerHTML = d.nav.map((n) =>
@@ -651,9 +808,10 @@
         <div class="screen" data-screen="impact">${renderImpact(d)}</div>
         <div class="screen" data-screen="experience">${renderExperience(d)}</div>
         <div class="screen" data-screen="credentials">${renderCredentials(d)}</div>
-        <div class="screen" data-screen="contact">${renderContact(d)}</div>`;
+        <div class="screen" data-screen="certificates">${renderCertificates(d)}</div>`;
 
       renderPrint(d);
+      certCarouselBound = false;
       document.querySelectorAll("[data-id]").forEach((btn) => {
         btn.addEventListener("click", () => showScreen(btn.dataset.id));
       });

@@ -1,15 +1,17 @@
 import { useLocale } from "../../locale";
-import { Badge, Card, ProfilePhoto, SectionTitle } from "../ui";
+import { ContactIcons } from "../ContactIcons";
+import { ShareButton } from "../ShareButton";
+import { Badge, Card, ProfilePhoto } from "../ui";
 
 export function MandateSection() {
   const { t } = useLocale();
-  const { profile, stats, featured } = t;
-  const email = t.contact.find((c) => c.type === "email");
-  const linkedin = t.contact.find((c) => c.type === "linkedin");
+  const { profile, stats } = t;
+  const paragraphs = profile.summary.split("\n\n").filter(Boolean);
 
   return (
-    <div id="mandate" className="space-y-5 sm:space-y-6 animate-fade-up">
-      <Card className="relative overflow-hidden">
+    <div id="mandate" className="animate-fade-up page-body page-body--mandate">
+      <div className="screen-stack">
+        <Card className="relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600/80 via-blue-500/40 to-transparent" />
 
         <div className="flex flex-col sm:flex-row gap-5 sm:gap-6">
@@ -19,10 +21,6 @@ export function MandateSection() {
           />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <Badge variant="success">
-                <span className="status-dot inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 mr-1.5" />
-                {profile.status}
-              </Badge>
               <Badge variant="muted">{profile.location}</Badge>
             </div>
             <h1 className="name-title text-2xl sm:text-3xl font-bold leading-tight">
@@ -30,33 +28,24 @@ export function MandateSection() {
             </h1>
             <p className="mt-1 text-base font-medium text-slate-200">{profile.role}</p>
             <p className="mt-1 text-sm text-slate-500">{profile.roleSub}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {email && (
-                <a href={email.href} className="cta-btn cta-btn-primary">
-                  {t.ui.write}
-                </a>
-              )}
-              {linkedin && (
-                <a
-                  href={linkedin.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-btn"
-                >
-                  LinkedIn
-                </a>
-              )}
-              <button type="button" className="cta-btn" onClick={() => window.print()}>
-                {t.ui.printPdf}
-              </button>
-              <ShareButton />
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <ContactIcons links={t.contact} />
+              <span className="hidden sm:block w-px h-6 bg-slate-700/60" aria-hidden />
+              <div className="flex flex-wrap gap-2">
+                <button type="button" className="cta-btn" onClick={() => window.print()}>
+                  {t.ui.printPdf}
+                </button>
+                <ShareButton />
+              </div>
             </div>
           </div>
         </div>
 
-        <p className="mt-5 text-sm sm:text-[15px] text-slate-400 leading-relaxed border-t border-slate-700/50 pt-5">
-          {profile.summary}
-        </p>
+        <div className="mt-5 space-y-3 text-sm sm:text-[15px] text-slate-400 leading-relaxed border-t border-slate-700/50 pt-5">
+          {paragraphs.map((p) => (
+            <p key={p.slice(0, 32)}>{p}</p>
+          ))}
+        </div>
 
         <ul className="mt-4 flex flex-wrap gap-2">
           {profile.highlights.map((h) => (
@@ -65,9 +54,9 @@ export function MandateSection() {
             </li>
           ))}
         </ul>
-      </Card>
+        </Card>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {stats.map((stat) => (
           <Card key={stat.label} className="!p-3 sm:!p-4 text-center">
             <p className="stat-value text-2xl sm:text-[1.75rem] font-bold">{stat.value}</p>
@@ -77,32 +66,8 @@ export function MandateSection() {
             )}
           </Card>
         ))}
+        </div>
       </div>
-
-      {featured.length > 0 && (
-        <Card className="!py-4 sm:!py-5">
-          <SectionTitle overline="Proof" title={t.ui.proofTitle} className="!mb-3" />
-          <ul className="space-y-2">
-            {featured.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 rounded-lg border border-slate-700/50 bg-slate-800/30 px-3.5 py-3 transition-colors hover:border-blue-600/40 hover:bg-slate-800/60"
-                >
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-400/80 w-14 shrink-0">
-                    {item.type === "press" ? "Press" : "Research"}
-                  </span>
-                  <span className="text-sm text-slate-300 leading-snug group-hover:text-slate-100 transition-colors">
-                    {item.label} →
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </Card>
-      )}
     </div>
   );
 }
